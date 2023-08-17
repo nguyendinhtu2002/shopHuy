@@ -52,17 +52,17 @@ const Navbar = () => {
               <i className="fa-solid fa-bag-shopping"></i>
             </span>
             <span className="navbar-brand-txt mx-2">
-              <span className="fw-7">THD</span>SHOP.
+              <span className="fw-7">HUY</span>SHOP.
             </span>
           </Link>
         </div>
 
-        <div className="navbar-collapse w-100">
-          <div className="navbar-search bg-white">
+        <div className="navbar-collapse w-[70%] rounded">
+          <div className="navbar-search bg-white ">
             <div className="flex align-center ps-relative">
               <input
                 type="text"
-                className="form-control fs-14"
+                className="form-control p-3 fs-14"
                 placeholder="Tìm kiếm các mặt hàng ưa thích của bạn ở đây"
                 onChange={(e) => handleSearchTerm(e)}
                 onKeyUp={(e) => {
@@ -70,6 +70,8 @@ const Navbar = () => {
                     navigate(`search/${searchTerm}`);
                   }
                 }}
+                style={{ height: "30px"}} // Thêm chiều cao và rộng tại đây
+
               />
               {searchTerm && (
                 <div className="search-popover">
@@ -90,15 +92,29 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
+          <div>
 
-          <ul className="navbar-nav flex align-center fs-12 fw-4 font-manrope">
-            {categories.slice(0, 12).map((category, idx) => (
-              <li className="nav-item no-wrap" key={idx}>
-                <Link to={`category/${category}`} className="nav-link text-capitalize">
-                  {category.replace("-", " ")}
-                </Link>
-              </li>
-            ))}
+          </div>
+
+          {/*<ul className="navbar-nav flex align-center fs-12 fw-4 font-manrope">*/}
+          {/*  {categories.slice(0, 12).map((category, idx) => (*/}
+          {/*    <li className="nav-item no-wrap" key={idx}>*/}
+          {/*      <Link to={`category/${category}`} className="nav-link text-capitalize hover:text-gray-500">*/}
+          {/*        {category.replace("-", " ")}*/}
+          {/*      </Link>*/}
+          {/*    </li>*/}
+          {/*  ))}*/}
+          {/*</ul>*/}
+        </div>
+
+        <div className="relative group inline-block ml-[32px]">
+          <a href="" className="p-5 rounded-lg transition duration-300 hover:bg-neutral-700/20">Category</a>
+          <ul className="hidden absolute rounded-b-lg p-5 z-10 top-[35px] right-0 bg-[#F94E30FF]
+          group group-hover:flex group-hover:space-x-5 transition duration-300 ">
+            <li className="p-3 rounded-lg hover:bg-neutral-700/20"><a href="" className="whitespace-no-wrap inline-block">Category 1</a></li>
+            <li className="p-3 rounded-lg hover:bg-neutral-700/20"><a href="" className="whitespace-no-wrap inline-block">Category 1</a></li>
+            <li className="p-3 rounded-lg hover:bg-neutral-700/20"><a href="" className="whitespace-no-wrapinline-block">Category 1</a></li>
+            <li className="p-3 rounded-lg hover:bg-neutral-700/20"><a href="" className="whitespace-no-wrapinline-block">Category 1</a></li>
           </ul>
         </div>
 

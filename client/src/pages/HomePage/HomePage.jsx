@@ -53,9 +53,9 @@ const HomePage = () => {
 
   return (
     <main>
-      <div className="slider-wrapper">
-        <HeaderSlider />
-      </div>
+      {/*<div className="slider-wrapper">*/}
+      {/*  <HeaderSlider />*/}
+      {/*</div>*/}
       <div className="main-content bg-whitesmoke">
         <div className="container">
           <div className="categories py-5">
