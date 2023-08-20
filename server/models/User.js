@@ -49,10 +49,12 @@ const userSchema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        createAt: {
+            type: Date,
+            default: Date.now
+        }
     },
-    {
-        timestamps: true,
-    }
+    
 );
 // Login
 userSchema.methods.matchPassword = async function (enterPassword) {

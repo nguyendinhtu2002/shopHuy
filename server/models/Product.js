@@ -26,10 +26,14 @@ const productSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  imgaeUrl: {
+  imgUrl: {
     type: String,
     require: true,
-  }
+  },
+  createAt: {
+    type: Date,
+    default: Date.now // Không có dấu ngoặc đơn ở đây
+}
 });
 const Product = mongoose.model("Product", productSchema);
 
