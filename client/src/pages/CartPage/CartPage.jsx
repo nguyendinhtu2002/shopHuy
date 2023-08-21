@@ -157,15 +157,19 @@ const CartPage = () => {
                 </span>
               </div>
 
-              <StripeCheckout
-                amount={totalAmount * 100}
-                token={onToken}
-                shippingAddress
-                // billingAddress={false}
-                zipCode={false}
+              <div>
+                <Link to="/shipping" className="text-center text-white block p-3 bg-[#3A37D5] hover:bg-[#3A37D5]/80 transition duration-300">Checkout</Link>
+              </div>
 
-                stripeKey="pk_test_51MqDa6CnJIa4Gyt64yUggYm6IjolIpWFmj2kIZAgWxf1poz5FwgIKs4ayEKOnt8OhemksZA7f2ohRyBSXlw94Nae00e7vs3NvG"
-              ></StripeCheckout>
+              {/*<StripeCheckout*/}
+              {/*  amount={totalAmount * 100}*/}
+              {/*  token={onToken}*/}
+              {/*  shippingAddress*/}
+              {/*  // billingAddress={false}*/}
+              {/*  zipCode={false}*/}
+
+              {/*  stripeKey="pk_test_51MqDa6CnJIa4Gyt64yUggYm6IjolIpWFmj2kIZAgWxf1poz5FwgIKs4ayEKOnt8OhemksZA7f2ohRyBSXlw94Nae00e7vs3NvG"*/}
+              {/*></StripeCheckout>*/}
             </div>
           </div>
         </div>
