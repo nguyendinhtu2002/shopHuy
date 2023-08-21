@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import PaymentByCard from "../MethodPayment/PaymentByCard";
 import InternetBanking from "../MethodPayment/InternetBanking";
 import ShipCOD from "../MethodPayment/ShipCOD";
+import {Link} from "react-router-dom";
 
 function Payment() {
     const [isPaymentByCard, setPaymentByCard] = useState(false)
@@ -139,15 +140,15 @@ function Payment() {
                     <div className="relative">
                         <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
                             <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200  font-semibold text-emerald-700"
-                                   href="#"
+                                <Link className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200  font-semibold text-emerald-700"
+                                   to="/"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"
                                          viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                     </svg
                                     >
-                                </a>
+                                </Link>
                                 <span className="font-semibold text-gray-900">Shop</span>
                             </li>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none"
@@ -155,15 +156,15 @@ function Payment() {
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                             </svg>
                             <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200  font-semibold text-emerald-700"
-                                   href="#"
+                                <Link className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200  font-semibold text-emerald-700"
+                                   to="/shipping"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"
                                          viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
                                     </svg
                                     >
-                                </a>
+                                </Link>
                                 <span className="font-semibold text-gray-900">Shipping</span>
                             </li>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none"
