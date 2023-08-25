@@ -236,11 +236,11 @@ const getUserById = async (req, res, next) => {
                 message: "SUCESS",
                 data: {
                     _id: user._id,
-                    firstName: user.firstName,
+                    name: user.name,
                     email: user.email,
-                    lastName: user.lastName,
                     sex: user.sex,
                     address: user.address,
+                    phoneNumber:user.phoneNumber,
                     wishList: user.wishList,
                     isAdmin: user.isAdmin,
                 },

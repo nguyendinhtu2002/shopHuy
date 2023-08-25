@@ -7,10 +7,11 @@ const {
   updateCategory,
 } = require("../controllers/CategoryController");
 const router = express.Router();
+const { protect, admin } = require("../middleware/AuthMiddleware");
 
-router.post("/", createCategory);
+router.post("/", protect, admin, createCategory);
 router.get("/getAll", getAllCategory);
 router.get("/getById/:id", getById);
-router.put("/update/:id", updateCategory);
-router.delete("/detele/:id", deleteCategory);
+router.put("/update/:id", protect, admin, updateCategory);
+router.delete("/detele/:id", protect, admin,  deleteCategory);
 module.exports = router;
