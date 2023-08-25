@@ -18,6 +18,8 @@ import {
 } from "./pages/index.jsx";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import PaymentPage from "./pages/PaymentPage/PaymentPage";
+import ShippingPage from "./pages/ShippingPage/ShippingPage";
 
 function App() {
   return (
@@ -43,6 +45,11 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             {/* searched products */}
             <Route path="/search/:searchTerm" element={<SearchPage />} />
+
+            <Route path="/shipping" element={<ShippingPage/>} />
+
+            <Route path="/payment" element={<PaymentPage/>} />
+
           </Routes>
 
           <Footer />

@@ -103,8 +103,9 @@ const Header = () => {
                     <img id="avatarButton" type="button"  onClick={toggleChecked} className="w-10 h-10 rounded-full cursor-pointer" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="User dropdown"/>
 
                       <div id="userDropdown" className={show?"z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 block absolute  ":"z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"}>
-                        <div className="px-4 py-3 text-xl text-gray-900 dark:text-white">
-                          <div>{usename}</div>
+                        <div className="px-4 py-3 text-xl text-gray-900 font-semibold dark:text-white">
+                          <span>Username</span>
+                          {/*<div>{usename}</div>*/}
                         </div>
                      
                         <div className="py-1">

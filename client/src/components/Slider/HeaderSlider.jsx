@@ -11,42 +11,56 @@ import {
 } from "./../../store/productSlice";
 import { Link } from "react-router-dom";
 
+
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+
+  return (
+      <div
+          className={className}
+          style={{
+            ...style,
+            display: "flex",
+            zIndex: "1000",
+            color: "white",
+            marginRight: "30px",
+            padding: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onClick={onClick}
+      />
+  );
+}
+
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+      <div
+          className={className}
+          style={{
+            ...style,
+            display: "flex",
+            zIndex: "1000",
+            color: "white",
+            marginLeft: "30px",
+            padding: "20px",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onClick={onClick}
+      />
+  );
+}
 const HeaderSlider = () => {
   let settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    speed: 3000,
-    autoplaySpeed: 2000,
-    centerMode: true,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 900,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    // centerMode: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   const dispatch = useDispatch();
@@ -80,34 +94,21 @@ const HeaderSlider = () => {
           <Slider {...settings}>
             <div className="slider-item">
               <Link to={`/product/${tempProducts[0]?.id}`}>
-                <img src={tempProducts[0]?.images[0]} alt="" />
+                <img src="https://cdn2.cellphones.com.vn/690x300,webp,q100/https://dashboard.cellphones.com.vn/storage/pre-wf-1000xm5-slide.png" alt="" />
               </Link>
             </div>
-            <div className="slider-item">
-              <Link to={`/product/${tempProducts[1]?.id}`}>
-                <img src={tempProducts[1]?.images[0]} alt="" />
-              </Link>
-            </div>
-            <div className="slider-item">
-              <Link to={`/product/${tempProducts[2]?.id}`}>
-                <img src={tempProducts[2]?.images[0]} alt="" />
-              </Link>
-            </div>
-            <div className="slider-item">
-              <Link to={`/product/${tempProducts[3]?.id}`}>
-                <img src={tempProducts[3]?.images[0]} alt="" />
-              </Link>
-            </div>
-            <div className="slider-item">
-              <Link to={`/product/${tempProducts[4]?.id}`}>
-                <img src={tempProducts[4]?.images[0]} alt="" />
-              </Link>
-            </div>
-            <div className="slider-item">
-              <Link to={`/product/${tempProducts[5]?.id}`}>
-                <img src={tempProducts[5]?.images[0]} alt="" />
-              </Link>
-            </div>
+              <div className="slider-item">
+                  <Link to={`/product/${tempProducts[0]?.id}`}>
+                      <img src="https://cdn2.cellphones.com.vn/690x300,webp,q100/https://dashboard.cellphones.com.vn/storage/pre-wf-1000xm5-slide.png" alt="" />
+                  </Link>
+              </div>
+              <div className="slider-item">
+                  <Link to={`/product/${tempProducts[0]?.id}`}>
+                      <img src="https://cdn2.cellphones.com.vn/690x300,webp,q100/https://dashboard.cellphones.com.vn/storage/pre-wf-1000xm5-slide.png" alt="" />
+                  </Link>
+              </div>
+
+
           </Slider>
         </div>
       </div>

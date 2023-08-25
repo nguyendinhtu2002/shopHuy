@@ -22,9 +22,9 @@ const Footer = () => {
             <Link to="/" className="text-uppercase">
               <ul>
                 <span className="text-sub">LIÊN HỆ CHÚNG TÔI</span>
-                <li>Email: THD@gmail.com</li>
-                <li>SĐT: +84 399085128</li>
-                <li>Địa chỉ : Vĩnh Hưng, Vĩnh Lộc, Thanh Hóa</li>
+                <li>Email: abc@gmail.com</li>
+                <li>SĐT: +84 123456789</li>
+                <li>Địa chỉ : Hà Nội</li>
               </ul>
             </Link>
           </div>
@@ -40,9 +40,9 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <span className="text-white copyright-text text-manrope fs-14 fw-3">
-          &copy; 2023 THD. Đã đăng ký bản quyền .
-        </span>
+        {/*<span className="text-white copyright-text text-manrope fs-14 fw-3">*/}
+        {/*  &copy; 2023 THD. Đã đăng ký bản quyền .*/}
+        {/*</span>*/}
       </div>
     </footer>
   );
