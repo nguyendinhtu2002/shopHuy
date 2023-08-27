@@ -20,6 +20,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import ShippingPage from "./pages/ShippingPage/ShippingPage";
+import UserInfo from "./components/UserInfo/UserInfo";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/user" element={<UserInfo />} />
             {/* single product route */}
             <Route path="/product/:id" element={<ProductSinglePage />} />
             {/* category wise product listing route */}

@@ -103,13 +103,13 @@ const Header = () => {
                     <img id="avatarButton" type="button"  onClick={toggleChecked} className="w-10 h-10 rounded-full cursor-pointer" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="User dropdown"/>
 
                       <div id="userDropdown" className={show?"z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 block absolute  ":"z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"}>
-                        <div className="px-4 py-3 text-xl text-gray-900 font-semibold dark:text-white">
-                          <span>Username</span>
+                        <div className="py-1">
+                          <Link to="/user" className="block px-4 py-2 text-dark font-semibold hover:bg-gray-100">Username</Link>
                           {/*<div>{usename}</div>*/}
                         </div>
                      
                         <div className="py-1">
-                          <Link to="/" onClick={handleLogout}   className="block px-4 py-2 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</Link>
+                          <Link to="/" onClick={handleLogout}   className="block px-4 py-2 text-xl text-gray-700 hover:bg-gray-100">Sign out</Link>
                         </div>
                       </div>
                   </div>
