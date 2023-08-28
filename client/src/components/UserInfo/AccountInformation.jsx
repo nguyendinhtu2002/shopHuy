@@ -7,7 +7,7 @@ function AccountInformation() {
     }
     return (
         <>
-            <div className="container">
+            <div className="container h-screen">
                 <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C]">Account Information</h1>
                 {!isEdit &&
                     <>

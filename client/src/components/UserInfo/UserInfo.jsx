@@ -19,12 +19,8 @@ function UserInfo() {
                         {/*<h3 className="text-2xl font-semibold text-capitalize text-gray-800">Change Password</h3>*/}
                     </div>
                 </div>
-                <div className="container bg-white grid sm:px-10 lg:grid-cols-4 lg:px-20 xl:px-32 h-screen">
+                <div className="bg-white grid sm:px-10 lg:grid-cols-4 lg:px-20 xl:px-32">
                     <SliderInfo/>
-
-                    {/*{isPaymentByCard&& <PaymentByCard />}*/}
-                    {/*{isInternetBanking&& <InternetBanking />}*/}
-                    {/*{isShipCod&& <ShipCOD />}*/}
                 </div>
 
             </div>

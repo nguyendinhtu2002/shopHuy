@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import {Link} from "react-router-dom";
 import AccountInformation from "./AccountInformation";
 import AddressDelivery from "./AddressDelivery";
+import HistoryOrder from "./HistoryOrder";
 
 function SliderInfo() {
     const [isAccountInformation, setAccountInformation] = useState()
@@ -25,7 +26,7 @@ function SliderInfo() {
     }
     return (
         <>
-            <div className="px-4 pt-8 bg-white col-span-1">
+            <div className=" px-4 pt-8 bg-white col-span-1">
                 <ul className="mt-5 grid bg-gray-50">
                     <li>
                         <div className="relative">
@@ -76,7 +77,7 @@ function SliderInfo() {
             </div>
             <div className="pt-8 px-4 col-span-3">
                 {isAccountInformation && <AccountInformation/>}
-                {isHistoryOrders && <AddressDelivery/>}
+                {isHistoryOrders && <HistoryOrder/>}
                 {isAddressDelivery && <AddressDelivery/>}
             </div>
         </>
