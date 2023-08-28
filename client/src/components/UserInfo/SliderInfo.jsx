@@ -26,7 +26,7 @@ function SliderInfo() {
     }
     return (
         <>
-            <div className=" px-4 pt-8 bg-white col-span-1">
+            <div className="px-4 py-8 bg-white lg:col-span-1">
                 <ul className="mt-5 grid bg-gray-50">
                     <li>
                         <div className="relative">
@@ -75,7 +75,7 @@ function SliderInfo() {
                     </li>
                 </ul>
             </div>
-            <div className="pt-8 px-4 col-span-3">
+            <div className="pt-8 px-4 lg:col-span-3">
                 {isAccountInformation && <AccountInformation/>}
                 {isHistoryOrders && <HistoryOrder/>}
                 {isAddressDelivery && <AddressDelivery/>}

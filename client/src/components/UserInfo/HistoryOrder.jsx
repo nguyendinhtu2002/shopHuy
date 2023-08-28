@@ -7,14 +7,14 @@ function HistoryOrder() {
                 <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C]">History Orders</h1>
 
                 <div className="cat-products-content">
-                    <div className="mx-auto grid lg:grid-cols-4 space-x-5 bg-whitesmoke my-3 "><a className="block"
+                    <div className="product-lists-history grid bg-whitesmoke my-3 "><a className="block"
                                                                                                   href="/product/undefined">
                         <div className="product-history bg-white mb-3">
                             <div className="category">smartphones</div>
                             <div className="product-history-img"><img className="img-cover"
                                                                    src="https://i.dummyjson.com/data/products/1/1.jpg"
                                                                    alt="iPhone 9"/></div>
-                            <div className="product-item-info fs-14">
+                            <div className="product-history-info fs-14">
                                 <div className="brand"><span>Brand: </span><span className="fw-7">Apple</span></div>
                                 <div className="title py-2">iPhone 9</div>
                                 <div className="price flex align-center justify-center"><span
