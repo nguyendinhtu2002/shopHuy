@@ -9,21 +9,19 @@ import AccountInformation from "./AccountInformation";
 function UserInfo() {
     return (
         <>
-            <div className="bg-gray-300 mx-auto mb-5">
+            <div className="bg-gray-300 mx-auto">
                 <div
                     className="flex flex-col justify-between items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-800">User Info</h1>
                     </div>
                     <div>
-                        <h3 className="text-2xl font-semibold text-capitalize text-gray-800">Change Password</h3>
+                        {/*<h3 className="text-2xl font-semibold text-capitalize text-gray-800">Change Password</h3>*/}
                     </div>
                 </div>
                 <div className="container bg-white grid sm:px-10 lg:grid-cols-4 lg:px-20 xl:px-32 h-screen">
                     <SliderInfo/>
-                    <div className="pt-8 px-4 col-span-3">
-                        <AccountInformation/>
-                    </div>
+
                     {/*{isPaymentByCard&& <PaymentByCard />}*/}
                     {/*{isInternetBanking&& <InternetBanking />}*/}
                     {/*{isShipCod&& <ShipCOD />}*/}
