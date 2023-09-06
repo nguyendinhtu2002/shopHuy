@@ -10,15 +10,13 @@ import React, { useEffect, useState } from "react";
 import Toast from '../../components/LoadingError/Toast';
 import { toast } from 'react-toastify';
 const schema = yup.object({
-
-  username: yup.string().required("Username is a required field"),
+  name:yup.string().required("FullName is a required field"),
   phone: yup
     .string()
     .required("PhoneNumber is a required field")
     .matches(/(?=.*[0-9])/, "Password must contain a number."),
   email: yup.string().required("Email is a required field").email("Email is not valid!."),
   password: yup.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: yup.string().oneOf([yup.ref("password")], "Password must be match."),
 });
 
 function Register() {
@@ -74,14 +72,15 @@ function Register() {
             <h4>Đăng ký</h4>
           </div>
           <form className="register-body" onSubmit={handleSubmit(formSubmit)}>
-            <Input
-              id="username"
-              label="Username"
+          <Input
+              id="name"
+              label="Full Name"
               type="text"
-              placeholder="Enter Username"
-              register={{ ...register("username") }}
-              errorMessage={errors.username?.message}
+              placeholder="Enter Full Name"
+              register={{ ...register("name") }}
+              errorMessage={errors.name?.message}
             />
+       
 
             <Input
               id="phoneNumber"
@@ -112,7 +111,7 @@ function Register() {
               label="Confirm Password"
               type="password"
               placeholder="Confirm PassWord"
-              register={{ ...register("confirmPassword") }}
+              // register={{ ...register("confirmPassword") }}
               errorMessage={errors.confirmPassword?.message}
             />
             <div className="register-footer">

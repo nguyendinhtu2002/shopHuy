@@ -37,7 +37,7 @@ const ProductSinglePage = () => {
     }
   }, [cartMessageStatus, id]);
 
-  let discountedPrice = product?.price - product?.price * (product?.discountPercentage / 100);
+  let discountedPrice = product?.price - product?.price * (product?.price / 100);
   if (productSingleStatus === STATUS.LOADING) {
     return <Loader />;
   }
@@ -75,7 +75,7 @@ const ProductSinglePage = () => {
               <div className="product-img">
                 <div className="product-img-zoom">
                   <img
-                    src={product ? (product.images ? product.images[0] : "") : ""}
+                    src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
                     alt=""
                     className="img-cover"
                   />
@@ -84,28 +84,28 @@ const ProductSinglePage = () => {
                 <div className="product-img-thumbs flex align-center my-2">
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.images ? product.images[1] : "") : ""}
+                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.images ? product.images[2] : "") : ""}
+                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.images ? product.images[3] : "") : ""}
+                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.images ? product.images[4] : "") : ""}
+                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
                       alt=""
                       className="img-cover"
                     />
@@ -123,18 +123,18 @@ const ProductSinglePage = () => {
                 <div className="info flex align-center flex-wrap fs-14">
                   <div className="rating">
                     <span className="text-orange fw-5">Rating:</span>
-                    <span className="mx-1">{product?.rating}</span>
+                    <span className="mx-1">{product?.rate}</span>
                   </div>
                   <div className="vert-line"></div>
                   <div className="brand">
                     <span className="text-orange fw-5">Brand:</span>
-                    <span className="mx-1">{product?.brand}</span>
+                    <span className="mx-1">IPHONE</span>
                   </div>
                   <div className="vert-line"></div>
                   <div className="brand">
                     <span className="text-orange fw-5">Category:</span>
                     <span className="mx-1 text-capitalize">
-                      {product?.category ? product.category.replace("-", " ") : ""}
+                      {product?.category ? product.name.replace("-", " ") : ""}
                     </span>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ const ProductSinglePage = () => {
                       {formatPrice(discountedPrice)}
                     </div>
                     <div className="discount bg-orange fs-13 text-white fw-6 font-poppins">
-                      {product?.discountPercentage}% OFF
+                      {formatPrice(product?.price)}% OFF
                     </div>
                   </div>
                 </div>

@@ -14,6 +14,9 @@ const productSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
+  brand:{
+   type:String,
+  },
   price: {
     type: Number,
     require: true,
@@ -26,10 +29,7 @@ const productSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  imgUrl: {
-    type: String,
-    require: true,
-  },
+  imgUrl: [String],
   createAt: {
     type: Date,
     default: Date.now // Không có dấu ngoặc đơn ở đây
