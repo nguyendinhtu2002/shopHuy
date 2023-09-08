@@ -60,7 +60,7 @@ const ProductSinglePage = () => {
 
   const addToCartHandler = (product) => {
     let discountedPrice = product?.price - product?.price * (product?.discountPercentage / 100);
-    let totalPrice = quantity * discountedPrice;
+    let totalPrice = quantity * product?.price;
 
     dispatch(addToCart({ ...product, quantity: quantity, totalPrice, discountedPrice }));
     dispatch(setCartMessageOn(true));

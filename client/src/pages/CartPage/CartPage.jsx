@@ -16,11 +16,9 @@ import axios from "axios";
 const CartPage = () => {
   const dispatch = useDispatch();
   const carts = useSelector(getAllCarts);
-  console.log(carts);
   const { itemsCount, totalAmount } = useSelector((state) => state.cart);
   const { id } = useSelector((state) => state.user);
   const onToken = async (token) => {
-    console.log(token);
     await axios
       .post("http://localhost:5000/api/v1/pay", { carts, token, id })
       .then((res) => {
@@ -84,7 +82,7 @@ const CartPage = () => {
                     <div className="w-[120px]">
                       <img
                         className="img-cover rounded-lg"
-                        src="https://i.dummyjson.com/data/products/1/1.jpg"
+                        src={cart.imgUrl[0]}
                         alt="iPhone 9"
                       />
                     </div>
@@ -126,7 +124,7 @@ const CartPage = () => {
 
                   <div className="cart-ctd">
                     <span className="cart-ctxt text-orange fw-5">
-                      {formatPrice(cart?.price)}
+                      {formatPrice(cart?.totalPrice)}
                     </span>
                   </div>
 
@@ -198,7 +196,7 @@ const CartPage = () => {
                     <div className="w-[120px]">
                       <img
                         className="img-cover rounded-lg"
-                        src="https://i.dummyjson.com/data/products/1/1.jpg"
+                        src={cart.imgUrl[0]}
                         alt="iPhone 9"
                       />
                     </div>
