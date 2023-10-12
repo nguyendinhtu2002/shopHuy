@@ -6,7 +6,7 @@ export const getPay = async (access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axiosJWT.get(`${API}/api/v1/order`, {
+  const res = await axiosJWT.get(`${API}/api/v1/order/getAll`, {
     headers,
   });
   return res.data;

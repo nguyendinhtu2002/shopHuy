@@ -60,62 +60,62 @@ const Orders = (props) => {
     }
   };
   const columns = [
-    {
-      name: "Ảnh",
-      selector: (row) => (
-        <img
-          src={row.order.products[0].image[0]}
-          // alt={row.products[0].title}
-          class="img-thumbnail"
-          style={{ maxWidth: "50%" }}
-        />
-      ),
-    },
+    // {
+    //   name: "Ảnh",
+    //   selector: (row) => (
+    //     <img
+    //       src={row.imgUrl[0]}
+    //       // alt={row.products[0].title}
+    //       class="img-thumbnail"
+    //       style={{ maxWidth: "50%" }}
+    //     />
+    //   ),
+    // },
   
     {
       name:"Sản phẩm",
-      selector: (row) => row.order.products[0].name,
+      selector: "",
     },
     {
       name: "Địa chỉ giao hàng",
-      selector: (row) => row.order.customerAddress,
+      selector: (row) =>"",
       
     },
     {
       name: "Số lượng",
-      selector: (row) => row.order.products[0].quantityOrder,
+      selector: (row) => "",
     },
     {
       name: "Tổng tiền",
-      selector: (row) => formattedAmount(row.order.totalPrice),
+      selector: "",
     },
     {
       name: "Trạng thái",
-      selector: (row) => row.order.status,
+      selector: "",
     },
 
-    {
-      name: "Hành động",
-      selector: (row) => (
-        <div className="d-flex" style={{ width: "450px" }}>
-          <Link
-            to={`/orders/${row.order._id}/edit`}
-            style={{ marginRight: "5px" }}
-            // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
-          >
-            <button className="btn btn-primary">Sửa</button>
-          </Link>
-          <button
-            type="button"
-            onClick={() => handleDelete(row.order._id)}
-            className="btn btn-danger"
-
-          >
-            Xóa
-          </button>
-        </div>
-      ),
-    },
+    // {
+    //   name: "Hành động",
+    //   selector: (row) => (
+    //     <div className="d-flex" style={{ width: "450px" }}>
+    //       <Link
+    //         to={`/orders/${row.order._id}/edit`}
+    //         style={{ marginRight: "5px" }}
+    //         // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
+    //       >
+    //         <button className="btn btn-primary">Sửa</button>
+    //       </Link>
+    //       <button
+    //         type="button"
+    //         onClick={() => handleDelete(row.order._id)}
+    //         className="btn btn-danger"
+    //
+    //       >
+    //         Xóa
+    //       </button>
+    //     </div>
+    //   ),
+    // },
   ];
   return (
     <>

@@ -61,7 +61,7 @@ const MainProducts = () => {
       name: "Ảnh",
       selector: (row) => (
         <img
-          src={row.images[0]}
+          src={row.imgUrl[0]}
           alt={row.title}
           class="img-thumbnail"
           style={{ maxWidth: "50%" }}
@@ -78,11 +78,11 @@ const MainProducts = () => {
     },
     {
       name: "Giá gốc",
-      selector: (row) => formattedAmount(row.priceOld),
+      selector: (row) => formattedAmount(row.price),
     },
     {
       name: "Giá bán",
-      selector: (row) => formattedAmount(row.priceReal),
+      selector: (row) => formattedAmount(row.price),
     },
     {
       name: "Số lượng còn",

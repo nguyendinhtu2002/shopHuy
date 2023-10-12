@@ -4,7 +4,7 @@ import { API } from "../utils/apiUrl";
 export const axiosJWT = axios.create();
 
 export const loginUser = async (data) => {
-  const res = await axios.post(`${API}/api/v1/users/login/admin`, data, {
+  const res = await axios.post(`${API}/api/v1/user/login/admin`, data, {
     withCredentials: true,
   });
   return res.data;
@@ -14,13 +14,13 @@ export const getDetailsUser = async (id, access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axiosJWT.get(`${API}/api/v1/users/${id}`, {
+  const res = await axiosJWT.get(`${API}/api/v1/user/${id}`, {
     headers,
   });
   return res.data;
 };
 export const logoutUser = async () => {
-  const res = await axios.post(`${API}/api/v1/users/logout`);
+  const res = await axios.post(`${API}/api/v1/user/logout`);
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
   localStorage.removeItem("persist:root");
@@ -28,7 +28,7 @@ export const logoutUser = async () => {
 };
 
 export const registerUser = async (data) => {
-  const res = await axios.post(`${API}/api/v1/users/register`, data);
+  const res = await axios.post(`${API}/api/v1/user/register`, data);
   return res.data;
 };
 
@@ -36,7 +36,7 @@ export const getAll = async (access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axiosJWT.get(`${API}/api/v1/users`, {
+  const res = await axiosJWT.get(`${API}/api/v1/user`, {
     headers,
   });
   return res.data;
@@ -47,7 +47,7 @@ export const updateUser = async (id, data, access_token) => {
     Authorization: `Bearer ${access_token}`,
   };
   const res = await axiosJWT.put(
-    `${API}/api/v1/users/updateAdmin/${id}`,
+    `${API}/api/v1/user/updateAdmin/${id}`,
     data,
     {
       headers,
@@ -56,7 +56,7 @@ export const updateUser = async (id, data, access_token) => {
   return res.data;
 };
 export const refreshToken = async (token) => {
-  const res = await axios.post(`${API}/api/v1/users/refresh_token`, {
+  const res = await axios.post(`${API}/api/v1/user/refresh_token`, {
     token: token,
   });
 
@@ -69,7 +69,7 @@ export const deleteUser = async (id,access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axios.delete(`${API}/api/v1/users/${id}`, {
+  const res = await axios.delete(`${API}/api/v1/user/${id}`, {
     headers,
   });
   return res.data;
