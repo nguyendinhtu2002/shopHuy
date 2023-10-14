@@ -72,7 +72,7 @@ const Payment = (props) => {
     {
       name: "Phương thức thanh toán",
       // selector: (row) => row.order.products[0].name,
-      selector: (row) => row.paymentMethod,
+      selector: (row) => row.type,
     },
     {
       name: "Thành tiền",

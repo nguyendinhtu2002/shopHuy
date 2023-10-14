@@ -74,24 +74,45 @@ const Orders = (props) => {
   
     {
       name:"Sản phẩm",
-      selector: "",
+      selector: (row)=>row.name,
     },
     {
       name: "Địa chỉ giao hàng",
-      selector: (row) =>"",
+      selector: (row) =>row.address,
       
     },
     {
       name: "Số lượng",
-      selector: (row) => "",
+      selector: (row) => row.quantity,
     },
     {
       name: "Tổng tiền",
-      selector: "",
+      selector:(row) => row.price,
     },
     {
       name: "Trạng thái",
       selector: "",
+    },
+    {
+      name: "Action",
+      selector: (row) => (
+          <div className="d-flex" style={{ width: "450px" }}>
+            <Link
+                to={`/payment/${row._id}/edit`}
+                style={{ marginRight: "5px" }}
+                // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
+            >
+              <button className="btn btn-primary">Sửa</button>
+            </Link>
+            <button
+                type="button"
+                onClick={() => handleDelete(row._id)}
+                className="btn btn-danger"
+            >
+              Xóa
+            </button>
+          </div>
+      ),
     },
 
     // {

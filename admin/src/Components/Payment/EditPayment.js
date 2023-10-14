@@ -106,7 +106,7 @@ const EditPaymentMain = (props) => {
                   {/* {productSingleStatus && <Loading />} */}
 
                   {/* productSingleStatus Loading */}
-                  {getDetail ? (
+                  {false ? (
                     <Loading />
                   ) : (
                     <>
