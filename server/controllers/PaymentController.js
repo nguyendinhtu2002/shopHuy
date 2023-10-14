@@ -40,9 +40,10 @@ const getAllPayment = async (req, res, next) => {
   try {
     const Payments = await Payment.find()
       .sort({ createdAt: -1 })
-      .populate("idUser", "nameUser");
+      .populate("userId", "nameUser");
     return res.status(200).json(Payments);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ error: "Internal server error" });
   }
 };

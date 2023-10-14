@@ -61,7 +61,7 @@ const Payment = (props) => {
     maximumFractionDigits: 0,
   };
   const formattedAmount = (amount, options) => {
-    return amount.toLocaleString(undefined, options);
+    return amount ? amount.toLocaleString(undefined, options) : 0; 
   };
   const columns = [
     {
@@ -77,7 +77,7 @@ const Payment = (props) => {
     {
       name: "Thành tiền",
       // selector: (row) => row.order.customerAddress,
-      selector: (row) => formattedAmount(row.amount),
+      selector: (row) => formattedAmount(row.money),
     },
 
     {

@@ -7,7 +7,7 @@ const TopTotal = (props) => {
   useEffect(() => {
     if (orders) {
       const total = orders.reduce((accumulator, currentOrder) => {
-        return accumulator + currentOrder.order.totalPrice;
+        return  currentOrder.order ? accumulator + currentOrder.order.totalPrice : accumulator + 0 ;
       }, 0);
       setTotalPrice(total);
     }
@@ -28,7 +28,7 @@ const TopTotal = (props) => {
             </span>
             <div className="text">
               <h6 className="mb-1">Tổng doanh thu</h6>{" "}
-              <span>{formattedAmount(totalPrice)}đ</span>
+              <span>{totalPrice ? formattedAmount(totalPrice) : 0}đ</span>
             </div>
           </article>
         </div>
