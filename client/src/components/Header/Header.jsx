@@ -74,7 +74,7 @@ const Header = () => {
             </div>
             <div className="header-cnt-top-r">
               <ul className="top-links flex align-center">
-                <li>
+                <li >
                   <Link to="/" className="top-link-itm">
                     <span className="top-link-itm-ico mx-2">
                       <i className="fa-solid fa-circle-question"></i>
@@ -82,6 +82,7 @@ const Header = () => {
                     <span className="top-link-itm-txt">Hỗ trợ</span>
                   </Link>
                 </li>
+
                 <li className="vert-line"></li>
                 { email=="" && !user && (
                   <>
@@ -100,20 +101,23 @@ const Header = () => {
                 )}
                 {  (email || user) && (
                   <div className='header-right'>
-                    <img id="avatarButton" type="button"  onClick={toggleChecked} className="w-10 h-10 rounded-full cursor-pointer" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="User dropdown"/>
+                    <button className="flex items-center gap-1 text-xl" onClick={toggleChecked}>
+                      <img id="avatarButton" type="button" className="w-10 h-10 rounded-full cursor-pointer" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="User dropdown"/>
+                      <span className="top-link-itm-txt">Tài khoản</span>
+                    </button>
 
-                      <div id="userDropdown" className={show?"z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 block absolute  ":"z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"}>
+                    <div id="userDropdown" className={show?"z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-68 dark:bg-gray-700 block absolute":"hidden"}>
                         <div className="py-1">
-                          <Link to="/user" className="block px-4 py-2 text-dark font-semibold hover:bg-gray-100">Username</Link>
-                          {/*<div>{usename}</div>*/}
+                          <Link to="/user" className="block px-4 py-2 text-gray-700 font-medium hover:bg-gray-100">Thông tin người dùng</Link>
                         </div>
                      
                         <div className="py-1">
-                          <Link to="/" onClick={handleLogout}   className="block px-4 py-2 text-xl text-gray-700 hover:bg-gray-100">Sign out</Link>
+                          <Link to="/" onClick={handleLogout} className="block px-4 py-2 text-xl text-gray-700 font-medium hover:bg-gray-100">Đăng xuất</Link>
                         </div>
                       </div>
                   </div>
                 )}
+
               </ul>
             </div>
           </div>
