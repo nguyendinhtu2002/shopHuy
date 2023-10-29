@@ -47,10 +47,6 @@ const Users = (props) => {
   };
   const columns = [
     {
-      name: "ID",
-      selector: (row) => row._id,
-    },
-    {
       name: "Họ và tên",
       selector: (row) => row.firstName + " " + row.lastName,
     },
@@ -75,7 +71,7 @@ const Users = (props) => {
             style={{ paddingRight: "5px" }}
             // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
           >
-            <button className="btn btn-primary">Sửa</button>
+            <button className="btn btn-warning">Sửa</button>
           </Link>
           <button
             type="button"

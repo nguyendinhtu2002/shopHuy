@@ -51,7 +51,7 @@ const Sidebar = () => {
                 to="/orders"
               >
                 <i className="icon fas fa-bags-shopping"></i>
-                <span className="text">Đơn đặt hàng</span>
+                <span className="text">Đơn hàng</span>
               </NavLink>
             </li>
             <li className="menu-item">
@@ -96,37 +96,6 @@ const Sidebar = () => {
                 <span className="text">Mã giảm giá</span>
               </NavLink>
             </li>
-            {/*<li className="menu-item">*/}
-            {/*  <NavLink*/}
-            {/*      activeClassName="active"*/}
-            {/*      className="menu-link "*/}
-            {/*      to="/message"*/}
-            {/*  >*/}
-            {/*    <i className="icon fas fa-phone"></i>*/}
-            {/*    <span className="text">Bình luận</span>*/}
-            {/*  </NavLink>*/}
-            {/*</li>*/}
-
-            {/* <li className="menu-item ">
-              <NavLink
-                activeClassName="active"
-                className="menu-link  "
-                to="/updates"
-              >
-                <i className="icon fas fa-usd-circle"></i>
-                <span className="text">Money</span>
-              </NavLink>
-            </li>
-            <li className="menu-item ">
-              <NavLink
-                activeClassName="active"
-                className="menu-link "
-                to="/history"
-              >
-                <i className="icon fas fa-usd-circle"></i>
-                <span className="text">History</span>
-              </NavLink>
-            </li> */}
           </ul>
           <br />
           <br />

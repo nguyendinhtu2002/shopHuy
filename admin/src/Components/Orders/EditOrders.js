@@ -80,18 +80,10 @@ const EditOrderMain = (props) => {
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={handleUpdate}>
           <div className="content-header">
-            <Link to="/orders" className="btn btn-danger text-white">
-              Về trang đơn hàng
-            </Link>
-            <h2 className="content-title">Sửa đơn hàng</h2>
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Xác nhận sửa
-              </button>
-            </div>
+            <h2 className="content-title text-capitalize">Sửa thông tin Đơn hàng</h2>
           </div>
 
-          <div className="row mb-4">
+          <div className="row">
             <div className="col-xl-12 col-lg-12">
               <div className="card mb-4 shadow-sm">
                 <div className="card-body">
@@ -150,6 +142,16 @@ const EditOrderMain = (props) => {
             </div>
           </div>
         </form>
+        <div className="d-flex gap-1 justify-content-end">
+          <Link to="/orders" className="btn btn-outline-secondary border border-2 text-dark">
+            Quay về
+          </Link>
+          <div>
+            <button type="submit" className="btn btn-success">
+              Hoàn thành
+            </button>
+          </div>
+        </div>
       </section>
     </>
   );

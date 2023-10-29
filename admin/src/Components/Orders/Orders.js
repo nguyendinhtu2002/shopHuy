@@ -60,18 +60,6 @@ const Orders = (props) => {
     }
   };
   const columns = [
-    // {
-    //   name: "Ảnh",
-    //   selector: (row) => (
-    //     <img
-    //       src={row.imgUrl[0]}
-    //       // alt={row.products[0].title}
-    //       class="img-thumbnail"
-    //       style={{ maxWidth: "50%" }}
-    //     />
-    //   ),
-    // },
-  
     {
       name:"Sản phẩm",
       selector: (row)=>row.name,
@@ -98,11 +86,11 @@ const Orders = (props) => {
       selector: (row) => (
           <div className="d-flex" style={{ width: "450px" }}>
             <Link
-                to={`/payment/${row._id}/edit`}
+                to={`/orders/${row._id}/edit`}
                 style={{ marginRight: "5px" }}
                 // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
             >
-              <button className="btn btn-primary">Sửa</button>
+              <button className="btn btn-warning">Sửa</button>
             </Link>
             <button
                 type="button"

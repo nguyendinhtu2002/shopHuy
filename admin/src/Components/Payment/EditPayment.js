@@ -84,15 +84,7 @@ const EditPaymentMain = (props) => {
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={handleUpdate}>
           <div className="content-header">
-            <Link to="/payment" className="btn btn-danger text-white">
-              Về trang thanh toán
-            </Link>
-            <h2 className="content-title">Sửa thanh toán</h2>
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Xác nhận sửa
-              </button>
-            </div>
+            <h2 className="content-title">Sửa thông tin thanh toán</h2>
           </div>
 
           <div className="row mb-4">
@@ -137,6 +129,17 @@ const EditPaymentMain = (props) => {
             </div>
           </div>
         </form>
+
+        <div className="d-flex justify-content-end gap-1">
+          <Link to="/payment" className="btn btn-outline-secondary border border-2 text-dark">
+            Quay về
+          </Link>
+          <div>
+            <button type="submit" className="btn btn-success">
+              Hoàn thành
+            </button>
+          </div>
+        </div>
       </section>
     </>
   );

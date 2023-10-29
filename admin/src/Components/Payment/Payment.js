@@ -94,7 +94,7 @@ const Payment = (props) => {
             style={{ marginRight: "5px" }}
             // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
           >
-            <button className="btn btn-primary">Sửa</button>
+            <button className="btn btn-warning">Sửa</button>
           </Link>
           <button
             type="button"

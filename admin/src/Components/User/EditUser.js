@@ -73,15 +73,7 @@ const EditOrderMain = (props) => {
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={handleUpdate}>
           <div className="content-header">
-            <Link to="/users" className="btn btn-danger text-white">
-              Về trang danh sách người dùng
-            </Link>
-            <h2 className="content-title">Update User</h2>
-            <div>
-              <button type="submit" className="btn btn-primary">
-                Xác nhận sửa
-              </button>
-            </div>
+            <h2 className="content-title text-capitalize">Sửa thông tin người dùng</h2>
           </div>
 
           <div className="row mb-4">
@@ -134,6 +126,17 @@ const EditOrderMain = (props) => {
             </div>
           </div>
         </form>
+
+        <div className="d-flex gap-1 justify-content-end">
+          <Link to="/users" className="btn btn-outline-secondary border border-2 text-dark">
+            Quay về
+          </Link>
+          <div>
+            <button type="submit" className="btn btn-success">
+              Hoàn thành
+            </button>
+          </div>
+        </div>
       </section>
     </>
   );
