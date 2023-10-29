@@ -41,9 +41,9 @@ function AddressDelivery() {
                     <div className="mt-2 text-[#FF0000]">
                         <span className="text-semibold border border-[#FF0000] border-1 py-1 px-2">Mặc định</span>
                     </div>
-                    <div className="absolute flex text-xl gap-5 right-3 top-1/2 -translate-y-1/2">
-                        <a className="cursor-pointer text-[#0500FF] hover:text-[#0500FF]/70" type="button" onClick={handleEdit}>Cập nhật</a>
-                        <a className="cursor-pointer text-[#0500FF] hover:text-[#0500FF]/70" type="button">Xóa</a>
+                    <div className="absolute flex text-[14px] gap-5 right-3 top-1/2 -translate-y-1/2">
+                        <a className="cursor-pointer text-[#0500FF] hover:text-[#dc3545] transition duration-300" type="button" onClick={handleEdit}>Cập nhật</a>
+                        <a className="cursor-pointer text-[#0500FF] hover:text-[#dc3545] transition duration-300" type="button">Xóa</a>
                     </div>
                 </div>
 

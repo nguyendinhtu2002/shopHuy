@@ -127,7 +127,7 @@ const CartPage = () => {
 
                   <div className="cart-ctd ">
                     <button
-                      className="delete-btn text-dark"
+                      className="delete-btn text-[#0500FF]"
                       onClick={() => dispatch(removeFromCart(cart?.id))}
                     >
                       Xóa
