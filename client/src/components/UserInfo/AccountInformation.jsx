@@ -1,64 +1,71 @@
 import React, {useState} from 'react'
-
+import icon_setting from "../../assets/icon_setting.png"
 function AccountInformation() {
-    const [isEdit, setEdit] = useState(false)
-    const handleEdit = () => {
-        setEdit(!isEdit)
-    }
     return (
         <>
             <div className="container h-screen">
-                <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C]">Account Information</h1>
-                {!isEdit &&
-                    <>
-                        <div className="mt-4 flex space-x-10">
-                            <div className="space-y-3 font-semibold">
-                                <p>Họ và tên</p>
-                                <p>Email</p>
-                                <p>Phone</p>
+                <h1 className="text-3xl uppercase font-semibold border-b-2 border-[#D52C2C]">Thông tin tài khoản</h1>
+
+                <div className="mt-4 grid grid-cols-2 gap-80">
+                    <div className="grid grid-cols-2 col-span-1">
+                        <div className="space-y-10 font-semibold">
+                            <div className="p-2">
+                                <p>Họ và tên <span className="text-[#FF0505]">*</span></p>
                             </div>
-                            <div className="space-y-3">
-                                <p>Duy Hưng</p>
-                                <p>duyhung@gmail.com</p>
-                                <p>0123456789</p>
+                            <div className="p-2">
+                                <p>Giới tính</p>
+                            </div>
+                            <div className="p-2">
+                                <p>Ngày sinh</p>
                             </div>
                         </div>
-                        <button onClick={handleEdit}
-                                className="mt-3 px-5 py-2 text-medium text-white rounded-lg bg-[#D52C2C] hover:opacity-80 transition duration-300">Edit
-                        </button>
-                    </>
-                }
-                {isEdit &&
-                    <>
-                        <div className="mt-4">
-                            <input placeholder="Name"
-                                   className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
-                            <input
-                                placeholder="Email"
-                                className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
-                            <input
-                                placeholder="Phone"
-                                className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
-
-
+                        <div className="space-y-10">
+                            <div className="border">
+                                <input className="w-full p-4 text-xl" type="text" placeholder="Họ và tên" required/>
+                            </div>
+                            <div className="border">
+                                <select className="border w-full px-3 py-2" name="gender" id="gender">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
+                            </div>
+                            <div className="border">
+                                <input className="w-full p-4 text-xl" type="date"/>
+                            </div>
                         </div>
-                        <div className="flex space-x-3">
-                            <button
-                                className="mt-3 px-5 py-2 text-medium text-white rounded-lg bg-dark hover:opacity-80 transition duration-300"
-                                onClick={handleEdit}
-                            >Save
-                            </button>
-                            <a
-                                className="mt-3 px-5 py-2 text-medium rounded-lg border-2 border-[#D52C2C] hover:border-0 hover:bg-[#D52C2C]/80 cursor-pointer hover:text-white hover:opacity-80 transition duration-300"
-                                onClick={handleEdit}
-                            >Cancel
-                            </a>
+                    </div>
+
+                    <div className="grid grid-cols-2 col-span-1">
+                        <div className="space-y-10 font-semibold">
+                            <div className="p-2">
+                                <p>Số điện thoại <span className="text-[#FF0505]">*</span></p>
+                            </div>
+                            <div className="p-2">
+                                <p>Email <span className="text-[#FF0505]">*</span></p>
+                            </div>
                         </div>
-
-                    </>
-                }
-
+                        <div className="space-y-10">
+                            <div className="border">
+                                <input className="w-full p-4 text-xl" type="text" placeholder="Số điện thoại" required/>
+                            </div>
+                            <div className="border">
+                                <input className="w-full p-4 text-xl" type="text" placeholder="Email" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-center mt-7">
+                    <button
+                        className="flex items-center gap-2 text-center px-3 py-2 text-2xl text-white rounded-lg bg-[#00C6F1] hover:bg-[#8DEAFF] transition duration-300">
+                        <span>
+                            <img className="w-[36px]" src={icon_setting} alt="icon setting"/>
+                        </span>
+                        Cập nhật
+                    </button>
+                </div>
             </div>
+
+
         </>
     )
 }

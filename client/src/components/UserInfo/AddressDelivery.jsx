@@ -2,83 +2,108 @@ import React, {useState} from 'react'
 
 function AddressDelivery() {
     const [isEdit, setEdit] = useState(false)
+    const [isDefault, setDefault] = useState(true)
+    const [typeLocation,setTypeLocation] = useState()
+
     const handleEdit = () => {
         setEdit(!isEdit)
     }
-
+    const handleDefault = () => {
+        setDefault(!isDefault)
+    }
+    const handleTypeLocation = (value) => {
+        setTypeLocation(value)
+    }
 
     return (
         <>
             <div className="container h-screen">
-                <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C]">Address Delivery</h1>
-                {!isEdit &&
-                    <>
-                        <div className="flex mt-4">
-                            <div className="flex-1 overflow-hidden">
+                <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C]">Địa chỉ giao hàng</h1>
+                <div className="text-end mt-2 flex justify-end">
+                    <button
+                        onClick={handleEdit}
+                        className="bg-[#F94E31] text-white flex items-center p-3 rounded hover:bg-[#FF8773] transition duration-300">
+                        <span className="font-semibold text-5xl mr-1">+</span>
+                        Thêm địa chỉ mới
+                    </button>
+                </div>
 
-                                <ul>
-                                    <li className="text-2xl font-semibold my-2 text-gray-600 uppercase ">
-                                        <svg className="inline align-text-top" height="24px" viewBox="0 0 24 24"
-                                             width="24px"
-                                             xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                                            <g>
-                                                <path d="m4.88889,2.07407l14.22222,0l0,20l-14.22222,0l0,-20z"
-                                                      fill="none"
-                                                      id="svg_1"
-                                                      stroke="null"></path>
-                                                <path
-                                                    d="m7.07935,0.05664c-3.87,0 -7,3.13 -7,7c0,5.25 7,13 7,13s7,-7.75 7,-13c0,-3.87 -3.13,-7 -7,-7zm-5,7c0,-2.76 2.24,-5 5,-5s5,2.24 5,5c0,2.88 -2.88,7.19 -5,9.88c-2.08,-2.67 -5,-7.03 -5,-9.88z"
-                                                    id="svg_2"></path>
-                                                <circle cx="7.04807" cy="6.97256" r="2.5" id="svg_3"></circle>
-                                            </g>
-                                        </svg>
-                                        Receiver
-                                    </li>
-                                    <li>Max Mustermann</li>
-                                    <li>Musterstrasse 1</li>
-                                    <li>4020 Linz</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button
-                            className="mt-3 px-5 py-2 text-medium text-white rounded-lg bg-[#D52C2C] hover:opacity-80 transition duration-300"
-                            onClick={handleEdit}
-                        >Edit
-                        </button>
-                    </>
-                }
+                <div className="relative mt-3 space-y-3 border-2 border-black px-3 py-3 h-[155px]">
+                    <div className="space-x-3">
+                        <span className="text-semibold">Nguyễn Văn A</span>
+                        <span className="text-[#ABABAB]">|</span>
+                        <span className="text-[#ABABAB]">(+84) 777 888 999</span>
+                    </div>
+                    <div className="">
+                        <p className="text-[#ABABAB]">Cổng sau đại học Thủy Lợi</p>
+                        <p className="text-[#ABABAB]">Phường Trung Liệt, quận Đống Đa, Hà Hội</p>
+                    </div>
+                    <div className="mt-2 text-[#FF0000]">
+                        <span className="text-semibold border border-[#FF0000] border-1 py-1 px-2">Mặc định</span>
+                    </div>
+                    <div className="absolute flex text-xl gap-5 right-3 top-1/2 -translate-y-1/2">
+                        <a className="cursor-pointer text-[#0500FF] hover:text-[#0500FF]/70" type="button" onClick={handleEdit}>Cập nhật</a>
+                        <a className="cursor-pointer text-[#0500FF] hover:text-[#0500FF]/70" type="button">Xóa</a>
+                    </div>
+                </div>
 
                 {isEdit &&
                     <>
-                        <div className="mt-4">
-                            <input placeholder="Name"
-                                   className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
-                            <input
-                                placeholder="Address"
-                                className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
-                            <div className="flex">
-                                <div className="flex-grow w-1/4 pr-2"><input placeholder="City"
-                                                                             className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
+                        <div className="fixed top-0 left-0 z-10 w-screen h-screen bg-neutral-700/20">
+                            <div className="w-[50%] px-10 py-4 relative top-[15%] translate-x-[60%] left-0 bg-[#EEEEEE]">
+                                <div className="space-y-8">
+                                    <h4 className="capitalize text-3xl">Thêm địa chỉ mới</h4>
+                                    <div className="flex justify-between">
+                                        <input className="p-4 text-2xl w-[280px]" type="text" placeholder="Họ và tên"/>
+                                        <input className="p-4 text-2xl w-[280px]" type="text" placeholder="Số điện thoại"/>
+                                    </div>
+                                    <div className="">
+                                        <input className="p-4 text-2xl w-full" type="text" placeholder="Tỉnh, thành phố, quận huyện, phường xã"/>
+                                    </div>
+                                    <div className="">
+                                        <textarea className="p-4 text-2xl w-full" rows="2" placeholder="Ghi chú"/>
+                                    </div>
                                 </div>
-                                <div className="flex-grow"><input placeholder="Country"
-                                                                  className=" text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2    transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"/>
+                                <div className="mt-3 space-y-2">
+                                    <p className="text-2xl">Loại địa chỉ</p>
+                                    <div className="flex gap-3" role="radiogroup">
+                                        <button
+                                            onClick={()=>handleTypeLocation("home")}
+                                            className={typeLocation==="home"? "bg-blue-500 p-3 text-xl":
+                                                "bg-white p-3 text-xl transition duration-500 ease-in-out hover:bg-blue-500"}
+
+                                        >Nhà riêng
+                                        </button>
+
+                                        <button
+                                            onClick={()=>handleTypeLocation("office")}
+                                            className={typeLocation==="office"?"bg-blue-500 p-3 text-xl":
+                                                "bg-white p-3 text-xl transition duration-500 ease-in-out hover:bg-blue-500"}
+                                        >Văn phòng
+                                        </button>
+                                    </div>
+                                    <div className=" flex items-center gap-2">
+                                        <input className="p-3" type="checkbox" id="default" onClick={handleDefault} checked={isDefault}/>
+                                        <label htmlFor="default">Đặt làm địa chỉ mặc định</label>
+                                    </div>
+                                </div>
+                                <div className="mt-4 space-x-1 flex justify-end text-sm">
+                                    <div className="border border-1 border-black">
+                                        <button
+                                            onClick={handleEdit}
+                                            className="w-[120px] text-black text-2xl py-2 hover:bg-[#ABABAB] transition duration-300"
+                                        >Trở lại
+                                        </button>
+                                    </div>
+                                    <div className="border border-1 border-[#F94E30] ">
+                                        <button
+                                            className="bg-[#F94E30] w-[120px] text-white text-2xl py-2 hover:bg-[#FF8773] transition duration-300">Hoàn thành
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div className="flex space-x-3">
-                            <button
-                                className="mt-3 px-5 py-2 text-medium text-white rounded-lg bg-dark hover:opacity-80 transition duration-300"
-                                onClick={handleEdit}
-                            >Save
-                            </button>
-                            <a
-                                className="mt-3 px-5 py-2 text-medium rounded-lg border-2 border-[#D52C2C] hover:border-0 hover:bg-[#D52C2C]/80 cursor-pointer hover:text-white hover:opacity-80 transition duration-300"
-                                onClick={handleEdit}
-                            >Cancel
-                            </a>
-                        </div>
-
                     </>
                 }
             </div>

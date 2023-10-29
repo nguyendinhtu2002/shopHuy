@@ -3,7 +3,10 @@ import {Link} from "react-router-dom";
 import AccountInformation from "./AccountInformation";
 import AddressDelivery from "./AddressDelivery";
 import HistoryOrder from "./HistoryOrder";
-
+import user from "../../assets/user.png"
+import icon_profile from "../../assets/icon_profile.png"
+import icon_history from "../../assets/icon_history.png"
+import icon_marker from "../../assets/icon_marker.png"
 function SliderInfo() {
     const [isAccountInformation, setAccountInformation] = useState()
     const [isHistoryOrders, setHistoryOrders] = useState()
@@ -26,17 +29,19 @@ function SliderInfo() {
     }
     return (
         <>
-            <div className="px-4 py-8 bg-white lg:col-span-1">
-                <ul className="mt-5 grid bg-gray-50">
+            <div className="px-4 py-8 bg-gray-50 lg:col-span-1">
+                <div className="p-5">
+                    <img src={user} alt="user_avatar"/>
+                </div>
+                <ul className="mt-5 space-y-3 grid">
                     <li>
                         <div className="relative">
                             <input className="peer hidden" id="radio_1" type="radio" name="radio"
                                    onClick={handleAccountInformation}/>
-                            <span
-                                className="peer-checked:border-[#D52C2C] peer-checked:border-8 absolute top-1/2 box-content block h-[65%] -translate-y-1/2 bg-white"></span>
                             <label
-                                className="peer-checked:border-2 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                                className="peer-checked:border-2 peer-checked:border-[#0500FF] flex cursor-pointer select-none border border-gray-300 p-4"
                                 htmlFor="radio_1">
+                                <span className=""><img className="w-10" src={icon_profile} alt="icon profile"/></span>
                                 <div className="ml-5">
                                     <span className="mt-2 font-semibold">Thông tin tài khoản</span>
                                 </div>
@@ -47,11 +52,10 @@ function SliderInfo() {
                         <div className="relative">
                             <input className="peer hidden" id="radio_2" type="radio" name="radio"
                                    onClick={handleHistoryOrders}/>
-                            <span
-                                className="peer-checked:border-[#D52C2C] peer-checked:border-8 absolute top-1/2 box-content block h-[65%] -translate-y-1/2 bg-white"></span>
                             <label
-                                className="peer-checked:border-2 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                                className="peer-checked:border-2 peer-checked:border-[#0500FF] flex cursor-pointer select-none border border-gray-300 p-4"
                                 htmlFor="radio_2">
+                                <span className=""><img className="w-10" src={icon_history} alt="icon history"/></span>
                                 <div className="ml-5">
                                     <span className="mt-2 font-semibold">Lịch sử mua hàng</span>
                                 </div>
@@ -62,11 +66,10 @@ function SliderInfo() {
                         <div className="relative">
                             <input className="peer hidden" id="radio_3" type="radio" name="radio"
                                    onClick={handleAddressDelivery}/>
-                            <span
-                                className="peer-checked:border-[#D52C2C] peer-checked:border-8 absolute top-1/2 box-content block h-[65%] -translate-y-1/2 bg-white"></span>
                             <label
-                                className="peer-checked:border-2 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                                className="peer-checked:border-2 peer-checked:border-[#0500FF] flex cursor-pointer select-none border border-gray-300 p-4"
                                 htmlFor="radio_3">
+                                <span className=""><img className="w-10" src={icon_marker} alt="icon marker"/></span>
                                 <div className="ml-5">
                                     <span className="mt-2 font-semibold">Địa chỉ giao hàng</span>
                                 </div>

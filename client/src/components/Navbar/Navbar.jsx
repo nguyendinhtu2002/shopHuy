@@ -45,7 +45,7 @@ const Navbar = () => {
               <i className="fa-solid fa-bag-shopping"></i>
             </span>
                         <span className="navbar-brand-txt mx-2">
-              <span className="fw-7">HUY</span>SHOP.
+              <span className="fw-7 uppercase">Techmedia</span>
             </span>
                     </Link>
 
@@ -54,12 +54,12 @@ const Navbar = () => {
                         className="sidebar-show-btn text-white hover:bg-neutral-700/20 p-3 rounded-lg"
                         onClick={() => dispatch(setSidebarOn())}
                     >
-                        Category
+                        Danh mục
                         {/*<i className="fas fa-bars"></i>*/}
                     </button>
                 </div>
 
-                <div className="navbar-collapse w-100  m-0 rounded">
+                <div className="navbar-collapse w-[88rem] m-0 rounded">
                     <div className="navbar-search bg-white ">
                         <div className="flex align-center ps-relative">
                             <input

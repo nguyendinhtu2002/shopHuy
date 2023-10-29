@@ -18,13 +18,13 @@ const CartPage = () => {
   const carts = useSelector(getAllCarts);
   const { itemsCount, totalAmount } = useSelector((state) => state.cart);
   const { id } = useSelector((state) => state.user);
-  const onToken = async (token) => {
-    await axios
-      .post("http://localhost:5000/api/v1/pay", { carts, token, id })
-      .then((res) => {
-        dispatch(clearCart());
-      });
-  };
+  // const onToken = async (token) => {
+  //   await axios
+  //     .post("http://localhost:5000/api/v1/pay", { carts, token, id })
+  //     .then((res) => {
+  //       dispatch(clearCart());
+  //     });
+  // };
 
   const handleCheckout = () => {};
 
@@ -51,22 +51,19 @@ const CartPage = () => {
           <div className="cart-chead bg-white">
             <div className="cart-ctr fw-6 font-manrope fs-15">
               <div className="cart-cth">
-                <span className="cart-ctxt">S.N.</span>
+                <span className="cart-ctxt">Sản phẩm</span>
               </div>
               <div className="cart-cth">
-                <span className="cart-ctxt">Product</span>
+                <span className="cart-ctxt">Đơn giá</span>
               </div>
               <div className="cart-cth">
-                <span className="cart-ctxt">Unit Price</span>
+                <span className="cart-ctxt">Số lượng</span>
               </div>
               <div className="cart-cth">
-                <span className="cart-ctxt">Quantity</span>
+                <span className="cart-ctxt">Thành tiền</span>
               </div>
               <div className="cart-cth">
-                <span className="cart-ctxt">Total Price</span>
-              </div>
-              <div className="cart-cth">
-                <span className="cart-ctxt">Actions</span>
+                <span className="cart-ctxt">Hành động</span>
               </div>
             </div>
           </div>
@@ -75,11 +72,11 @@ const CartPage = () => {
             {carts.map((cart, idx) => {
               return (
                 <div className="cart-ctr py-4" key={cart?.id}>
-                  <div className="cart-ctd">
-                    <span className="cart-ctxt">{idx + 1}</span>
-                  </div>
+                  {/*<div className="cart-ctd">*/}
+                  {/*  <span className="cart-ctxt">{idx + 1}</span>*/}
+                  {/*</div>*/}
                   <div className="cart-ctd flex items-center space-x-3">
-                    <div className="w-[120px]">
+                    <div className="w-[140px]">
                       <img
                         className="img-cover rounded-lg"
                         src={cart.imgUrl[0]}
@@ -133,7 +130,7 @@ const CartPage = () => {
                       className="delete-btn text-dark"
                       onClick={() => dispatch(removeFromCart(cart?.id))}
                     >
-                      Delete
+                      Xóa
                     </button>
                   </div>
                 </div>
@@ -141,7 +138,7 @@ const CartPage = () => {
             })}
           </div>
 
-          <div className="cart-cfoot flex align-start justify-between py-3 bg-white">
+          <div className="cart-cfoot flex align-end justify-between py-3 bg-white">
             <div className="cart-cfoot-l">
               <button
                 type="button"
@@ -149,14 +146,14 @@ const CartPage = () => {
                 onClick={() => dispatch(clearCart())}
               >
                 <i className="fas fa-trash"></i>
-                <span className="mx-1">Clear Cart</span>
+                <span className="mx-1">Xóa giỏ hàng</span>
               </button>
             </div>
 
             <div className="cart-cfoot-r flex flex-column justify-end">
               <div className="total-txt flex align-center justify-end">
                 <div className="font-manrope fw-5">
-                  Total ({itemsCount}) items:{" "}
+                  Tổng tiền:{" "}
                 </div>
                 <span className="text-orange fs-22 mx-2 fw-6">
                   {formatPrice(totalAmount)}
@@ -168,7 +165,7 @@ const CartPage = () => {
                   to="/shipping"
                   className="text-center text-white rounded-lg block p-3 bg-[#3A37D5] hover:bg-[#3A37D5]/80 transition duration-300"
                 >
-                  Checkout
+                  Thanh toán
                 </Link>
               </div>
 
@@ -243,7 +240,7 @@ const CartPage = () => {
                       className="delete-btn text-dark"
                       onClick={() => dispatch(removeFromCart(cart?.id))}
                     >
-                      Delete
+                      Xóa
                     </button>
                   </div>
                 </div>
