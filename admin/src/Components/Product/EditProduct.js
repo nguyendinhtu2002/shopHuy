@@ -23,29 +23,18 @@ const EditProductMain = (props) => {
 
   const [name, setName] = useState("");
   const [rate, setRate] = useState(0);
-  const [priceOld, setPriceOld] = useState(0);
   const [priceReal, setPriceReal] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
-  const [material, setMaterial] = useState("");
   const [origin, setOrigin] = useState("");
-  const [ageTram, setAgeTram] = useState("");
-  const [howToUse, setHowToUse] = useState("");
-  const [soLuongHat, setSoLuongHat] = useState(0);
-  const [loaiCharm, setLoaiCharm] = useState("");
-  const [menh, setMenh] = useState("");
-  const [forGender, setForGender] = useState("");
-
-  const dispatch = useDispatch();
-
+  const [showMessage,setShowMessage] = useState(false);
   const handleGetDetailsProduct = async () => {
     const res = await ProductService.getDetilsProduct(id);
     return res;
   };
   const { access_token } = useSelector((state) => state.user);
-  const { productSingle } = useSelector((state) => state.ProductSignle);
   const mutation = useMutationHooks((data) => {
     const { id, access_token, ...rests } = data;
     ProductService.updateProduct(id, rests, access_token);
@@ -53,7 +42,6 @@ const EditProductMain = (props) => {
   const { data, error, isLoading, isError, isSuccess } = mutation;
   const handleUpdate = (e) => {
     e.preventDefault();
-
     mutation.mutate({
       id: id,
       name,
@@ -61,16 +49,8 @@ const EditProductMain = (props) => {
       description,
       images,
       rate,
-      priceOld,
       priceReal,
-      material,
-      origin,
       quantity,
-      old: ageTram,
-      use: howToUse,
-      soLuongHat,
-      type: loaiCharm,
-      forGender,
       access_token,
     });
 
@@ -88,31 +68,18 @@ const EditProductMain = (props) => {
       setName(dataDetail.name);
       setCategory(dataDetail.category);
       setDescription(dataDetail.description);
-      setImages(dataDetail.images);
+      setImages(dataDetail.imgUrl);
       setRate(dataDetail.rate);
-      setPriceOld(dataDetail.priceOld);
-      setPriceReal(dataDetail.priceReal);
+      setPriceReal(dataDetail.price);
       setQuantity(dataDetail.quantity);
-      if (dataDetail.material) {
-        setMaterial(dataDetail.material);
-      }
-      if (dataDetail.origin) {
-        setOrigin(dataDetail.origin);
-      }
-      setAgeTram(dataDetail.old);
-      setHowToUse(dataDetail.use);
-      if (dataDetail.count) {
-        setSoLuongHat(dataDetail?.count[0]);
-      }
-      if (dataDetail.type) {
-        setLoaiCharm(dataDetail.type);
-      }
-      //   setMenh(dataDetail.menh);
-      setForGender(dataDetail.slug);
-      setImages(dataDetail.images);
     }
   }, [dataDetail]);
 
+  useEffect(()=>{
+    if (error === null && isSuccess) {
+      setShowMessage(true);
+    }
+  },[error, isSuccess])
   return (
     <>
       <Toast />
@@ -187,17 +154,7 @@ const EditProductMain = (props) => {
                           onChange={(e) => setDescription(e.target.value)}
                         />
                       </div>
-                      <div className="mb-4">
-                        <label className="form-label">Gái gốc</label>
-                        <input
-                          type="number"
-                          placeholder="Type here"
-                          className="form-control"
-                          required
-                          value={priceOld}
-                          onChange={(e) => setPriceOld(e.target.value)}
-                        ></input>
-                      </div>
+                  
                       <div className="mb-4">
                         <label className="form-label">Giá bán</label>
                         <input
@@ -229,16 +186,6 @@ const EditProductMain = (props) => {
                           required
                           value={quantity}
                           onChange={(e) => setQuantity(e.target.value)}
-                        ></input>
-                      </div>
-                      <div className={material != "" ? "mb-4" : "d-none"}>
-                        <label className="form-label">Chất liệu</label>
-                        <input
-                          type="text"
-                          placeholder="Type here"
-                          className="form-control"
-                          value={material}
-                          onChange={(e) => setMaterial(e.target.value)}
                         ></input>
                       </div>
                       <div className={origin != "" ? "mb-4" : "d-none"}>
@@ -273,117 +220,6 @@ const EditProductMain = (props) => {
                           </option>
                         </select>
                       </div>
-                      <div className="mb-4">
-                        <label className="form-label">Tuổi Trầm</label>
-                        <input
-                          type="text"
-                          placeholder="Type here"
-                          className="form-control"
-                          value={ageTram}
-                          onChange={(e) => setAgeTram(e.target.value)}
-                        ></input>
-                      </div>
-                      <div className="mb-4">
-                        <label className="form-label">Cách sử dụng</label>
-                        <textarea
-                          placeholder="Type here"
-                          className="form-control"
-                          value={howToUse}
-                          onChange={(e) => setHowToUse(e.target.value)}
-                        ></textarea>
-                      </div>
-                      <div className={soLuongHat !== 0 ? "mb-4" : "d-none"}>
-                        <label className="form-label">Số lượng hạt</label>
-                        <input
-                          type="text"
-                          placeholder="Type here"
-                          className="form-control"
-                          value={soLuongHat}
-                          onChange={(e) => setSoLuongHat(e.target.value)}
-                        ></input>
-                      </div>
-                      <div className="mb-4">
-                        <label className="form-label">Loại Charm</label>
-                        <input
-                          type="text"
-                          placeholder="Type here"
-                          className="form-control"
-                          value={loaiCharm}
-                          onChange={(e) => setLoaiCharm(e.target.value)}
-                        ></input>
-                      </div>
-                      {/* <div className="mb-4 ">
-                        <label className="form-label">
-                          Choose Type Category
-                        </label>
-                        <div className="d-flex">
-                          <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="flexRadioDefault"
-                              id="flexRadioDefault1"
-                            />
-                            <label
-                              class="form-check-label"
-                              for="flexRadioDefault1"
-                            >
-                              Default radio
-                            </label>
-                          </div>
-                          <div class="form-check mx-3">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="flexRadioDefault"
-                              id="flexRadioDefault2"
-                              checked
-                            />
-                            <label
-                              class="form-check-label"
-                              for="flexRadioDefault2"
-                            >
-                              Default checked radio
-                            </label>
-                          </div>
-                        </div>
-                      </div> */}
-                      <div
-                        className={
-                          description === "Vòng trầm Thiên Mộc Hương"
-                            ? "mb-4"
-                            : "d-none"
-                        }
-                      >
-                        <label className="form-label">Mệnh</label>
-                        <select
-                          className="form-select"
-                          onChange={(e) => setMenh(e.target.value)}
-                        >
-                          <option value="" disabled>
-                            None
-                          </option>
-                          <option value="Kim" selected={menh === "Kim"}>
-                            Vòng tay cho nữ
-                          </option>
-                          <option value="Mộc" selected={menh === "Mộc"}>
-                            Vòng tay cho nam
-                          </option>
-                          <option value="Thuỷ" selected={menh === "Thuỷ"}>
-                            Mệnh Mộc
-                          </option>
-                          <option value="Thuỷ" selected={menh === "Thuỷ"}>
-                            Mệnh Thủy
-                          </option>
-                          <option value="Hỏa" selected={menh === "Hỏa"}>
-                            Mệnh Hỏa
-                          </option>
-                          <option value="Thổ" selected={menh === "Thổ"}>
-                            Mệnh Thổ
-                          </option>
-                        </select>
-                      </div>
-
                       <div class="mb-3">
                         <label for="formFileMultiple" class="form-label">
                           Ảnh

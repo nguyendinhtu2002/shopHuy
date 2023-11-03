@@ -6,7 +6,7 @@ export const createCategory = async (data, access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axiosJWT.post(`${API}/api/v1/category/create`, data, {
+  const res = await axiosJWT.post(`${API}/api/v1/category`, data, {
     headers,
   });
   return res.data;
@@ -20,7 +20,7 @@ export const deleteCategory = async (id, access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axiosJWT.put(`${API}/api/v1/category/delete/${id}`, null, {
+  const res = await axiosJWT.delete(`${API}/api/v1/category/${id}`, null, {
     headers,
   });
   return res.data;

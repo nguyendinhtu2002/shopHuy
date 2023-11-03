@@ -32,7 +32,7 @@ const orderSchema = mongoose.Schema({
   },
   createAt: {
     type: Date,
-    default: Date.now // Không có dấu ngoặc đơn ở đây
+    default: Date.now 
 }
 });
 

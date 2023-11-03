@@ -74,11 +74,7 @@ const MainProducts = () => {
     },
     {
       name: "Danh mục",
-      selector: (row) => row.category,
-    },
-    {
-      name: "Giá gốc",
-      selector: (row) => formattedAmount(row.price),
+      selector: (row) => "test",
     },
     {
       name: "Giá bán",
@@ -94,7 +90,7 @@ const MainProducts = () => {
     },
     {
       name: "Trạng thái",
-      selector: (row) => (row.status ? "Còn hàng" : "Hết hàng"),
+      selector: (row) => (row.quantity > 0 ? "Còn hàng" : "Hết hàng"),
     },
     {
       name: "Hành động",
@@ -156,7 +152,7 @@ const MainProducts = () => {
               <Loading />
             ) : (
               <div className="row">
-                <Table data={tempData} columns={columns} sub={true} />
+                <Table data={tempData} columns={columns} sub={true} loading = {loading} />
               </div>
             )}
           </div>

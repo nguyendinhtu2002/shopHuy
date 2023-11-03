@@ -22,24 +22,13 @@ const AddProductMain = () => {
   const [name, setName] = useState("");
   const [rate, setRate] = useState(0);
   const dispatch = useDispatch();
-  const [priceOld, setPriceOld] = useState(0);
-  const [priceReal, setPriceReal] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
   const [idCategory, setIdCategory] = useState("");
-  const [material, setMaterial] = useState("");
-  const [origin, setOrigin] = useState("");
-  const [ageTram, setAgeTram] = useState("");
-  const [howToUse, setHowToUse] = useState("");
-  const [soLuongHat, setSoLuongHat] = useState("");
-  const [loaiCharm, setLoaiCharm] = useState("");
-  const [slug, setSlug] = useState("");
-  const [forGender, setForGender] = useState("");
-  const [size, setSize] = useState("");
+  const [brand, setBrand] = useState("");
+  const [price,setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
-
-  const [loading, setLoading] = useState(false);
   const [tempData, setTempData] = useState([]);
   const toastId = React.useRef(null);
   const Toastobjects = {
@@ -67,7 +56,7 @@ const AddProductMain = () => {
       name === "" ||
       category === "" ||
       description === "" ||
-      priceReal === 0 ||
+      price === 0 ||
       rate === 0
     ) {
       if (!toast.isActive(toastId.current)) {
@@ -91,35 +80,25 @@ const AddProductMain = () => {
       } catch (error) {
         console.log(error);
       }
-      const access_token = localStorage.getItem("access_token")
+      const access_token = JSON.parse(localStorage.getItem("access_token"))
       mutationAddProduct.mutate({
         name,
         category,
         description,
-        priceOld,
-        priceReal,
+        price,
         rate,
-        material,
-        origin,
-        old:ageTram,
-        use: howToUse,
-        count: soLuongHat,
-        loaiCharm,
-        slug,
-        categoryId:idCategory,
+        brand,
+        category: idCategory,
         quantity,
-        images: uploadedImageUrls,
+        imgUrl: uploadedImageUrls,
         access_token,
       });
     }
   };
   const hangldeGetAll = async () => {
-    setLoading(true);
     const resCategory = await CategoryService.getCategory();
-    setLoading(false);
     setTempData(resCategory);
 
-    // dispatch(updatePay(res));
   };
   const { error, isLoading, isSuccess, isError } = mutationAddProduct;
   useEffect(() => {
@@ -221,39 +200,15 @@ const AddProductMain = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label className="form-label">Giá gốc</label>
-                    <input
-                      type="number"
-                      placeholder="Type here"
-                      className="form-control"
-                      onChange={(e) => setPriceOld(e.target.value)}
-                    ></input>
-                  </div>
-                  <div className="mb-4">
                     <label className="form-label">Giá bán</label>
                     <input
                         type="number"
                         placeholder="Type here"
                         className="form-control"
-                        onChange={(e) => setPriceReal(e.target.value)}
+                        onChange={(e) => setPrice(e.target.value)}
                     ></input>
                   </div>
-                  <div
-                    className={
-                      category === "Vòng trầm Thiên Mộc Hương"
-                        ? "mb-4"
-                        : "d-none"
-                    }
-                  >
-                    <label className="form-label">Size</label>
-                    <input
-                      type="number"
-                      placeholder="Type here"
-                      className="form-control"
-                      onChange={(e) => setSize(e.target.value)}
-                    ></input>
-                  </div>
-
+                
                   <div className="mb-4">
                     <label className="form-label">Đánh giá</label>
                     <input
@@ -263,6 +218,7 @@ const AddProductMain = () => {
                       onChange={(e) => setRate(e.target.value)}
                     ></input>
                   </div>
+
                   <div className="mb-4">
                     <label className="form-label">Số lượng còn</label>
                     <input
@@ -272,113 +228,25 @@ const AddProductMain = () => {
                       onChange={(e) => setQuantity(e.target.value)}
                     ></input>
                   </div>
+
                   <div className="mb-4">
-                    <label className="form-label">Chất liệu</label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
-                      value={material}
-                      onChange={(e) => setMaterial(e.target.value)}
-                    ></input>
-                  </div>
-                  <div className="mb-4">
-                    <label className="form-label">Nguồn gốc</label>
+                    <label className="form-label">Thương hiệu</label>
                     <select
                       className="form-select"
-                      onChange={(e) => setOrigin(e.target.value)}
+                      onChange={(e) => setBrand(e.target.value)}
                     >
                       <option value="" selected disabled>
                         None
                       </option>
-                      <option value="vietnam">Việt Nam</option>
-                      <option value="philippines">Philippines</option>
-                      <option value="indonesia">Indonesia</option>
+                      <option value="samsung">SamSung</option>
+                      <option value="taotau">Táo tàu</option>
+                      <option value="taocannua">Táo cắn nửa</option>
+                      <option value="iphone">Iphone</option>
+                      <option value="redmi">Redmi</option>
+                      <option value="oppo">Oppo</option>
                     </select>
                   </div>
-                  <div className="mb-4">
-                    <label className="form-label">Tuổi Trầm</label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
-                      value={ageTram}
-                      onChange={(e) => setAgeTram(e.target.value)}
-                    ></input>
-                  </div>
-                  <div className="mb-4">
-                    <label className="form-label">Cách sử dụng</label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
-                      value={howToUse}
-                      onChange={(e) => setHowToUse(e.target.value)}
-                    ></input>
-                  </div>
-                  <div
-                    className={
-                      category === "Vòng trầm Thiên Mộc Hương"
-                        ? "mb-4"
-                        : "d-none"
-                    }
-                  >
-                    <label className="form-label">Số lượng hạt</label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
-                      onChange={(e) => setSoLuongHat(e.target.value)}
-                    ></input>
-                  </div>
-                  <div
-                    className={
-                      category === "Vòng trầm Thiên Mộc Hương"
-                        ? "mb-4"
-                        : "d-none"
-                    }
-                  >
-                    <label className="form-label">Loại Charm</label>
-                    <input
-                      type="text"
-                      placeholder="Type here"
-                      className="form-control"
-                      value={loaiCharm}
-                      onChange={(e) => setLoaiCharm(e.target.value)}
-                    ></input>
-                  </div>
-
-                  <div className="mb-4">
-                    <label className="form-label">Slug</label>
-                    <select
-                      className="form-select"
-                      onChange={(e) => setSlug(e.target.value)}
-                    >
-                      <option selected disabled>
-                        None
-                      </option>
-                      <option value="vong-tram-huong-nu">
-                        Vòng Trầm Hương Nữ
-                      </option>
-                      <option value="vong-tram-huong-nam">
-                        Vòng Trầm Hương Nam
-                      </option>
-                      <option value="menh-moc">Mệnh Mộc</option>
-                      <option value="menh-thuy">Mệnh Thủy</option>
-                      <option value="menh-hoa">Mệnh Hỏa</option>
-                      <option value="menh-tho">Mệnh Thổ</option>
-                      <option value="menh-kim">Mệnh Kim</option>
-                      <option value="nhang-vong-tram-huong">
-                        Nhang Vòng Trầm Hương
-                      </option>
-                      <option value="nhang-vong-co-tam">
-                        Nhang Vòng Có Tăm
-                      </option>
-                      <option value="nhang-vong-khong-tam">
-                        Nhang Vòng Không Tăm
-                      </option>
-                    </select>
-                  </div>
+  
                   <div class="mb-3">
                     <label for="formFileMultiple" class="form-label">
                       Ảnh

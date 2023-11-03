@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema({
+  productCode: {
+    type:String,
+    require: true,
+  },
   name: {
     type: String,
     require: true,
@@ -32,9 +36,25 @@ const productSchema = mongoose.Schema({
   imgUrl: [String],
   createAt: {
     type: Date,
-    default: Date.now // Không có dấu ngoặc đơn ở đây
-}
+    default: Date.now 
+  }
 });
+
+productSchema.pre("save", async function (next) {
+  if (!this.productCode) {
+    const highestProduct = await this.constructor.findOne({}, { productCode: 1 }, { sort: { productCode: -1 } });
+
+    if (highestProduct) {
+      const lastProductCode = highestProduct.productCode;
+      const lastNumber = parseInt(lastProductCode.substr(2), 10);
+      this.productCode = `SP${lastNumber + 1}`;
+    } else {
+      this.productCode = "SP1";
+    }
+  }
+  next();
+});
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

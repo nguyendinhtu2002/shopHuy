@@ -2,6 +2,10 @@ const { ref } = require("joi");
 const mongoose = require("mongoose");
 
 const paymentSchema = mongoose.Schema({
+  paymentCode: {
+    type: String,
+    require: true,
+  },
   type: {
     type: String,
     enum: ["paypal", "cash"],
@@ -33,6 +37,20 @@ const paymentSchema = mongoose.Schema({
   }
 });
 
+paymentSchema.pre("save", async function (next) {
+  if (!this.paymentCode) {
+    const highestProduct = await this.constructor.findOne({}, { paymentCode: 1 }, { sort: { paymentCode: -1 } });
+
+    if (highestProduct) {
+      const lastpaymentCode = highestProduct.paymentCode;
+      const lastNumber = parseInt(lastpaymentCode.substr(2), 10);
+      this.paymentCode = `SP${lastNumber + 1}`;
+    } else {
+      this.paymentCode = "SP1";
+    }
+  }
+  next();
+});
 
 const Payment = mongoose.model("Payment", paymentSchema);
 

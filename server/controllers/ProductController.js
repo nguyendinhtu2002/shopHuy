@@ -9,7 +9,8 @@ const createProduct = async (req, res) => {
     price: Joi.number().required(),
     rate: Joi.number().default(0),
     description: Joi.string().required(),
-    imgUrl: Joi.string().required(),
+    imgUrl: Joi.array().required(),
+    brand: Joi.string().required()
   });
 
   const { error } = schema.validate(req.body);
@@ -30,7 +31,7 @@ const createProduct = async (req, res) => {
 };
 const getAllProduct = async (req, res) => {
   try {
-    const product = await Product.find({}).sort({ createdAt: -1 });
+    const product = await Product.find({}).sort({ createdAt: -1 }).populate('category', 'name');
     return res.json(product);
   } catch (error) {
     res.json(error);

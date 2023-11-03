@@ -6,18 +6,13 @@ import CustomSelect from "./Select";
 import { useLocation } from "react-router-dom";
 
 function Table(props) {
-  const { data, columns, sub } = props;
+  const { data, columns, sub, loading } = props;
   const [search, setSearch] = useState("");
   const [datas, setTempData] = useState(data);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
   const location = useLocation();
-  const uniqueCategories = data.reduce((acc, product) => {
-    if (!acc.includes(product.category)) {
-      acc.push(product.category);
-    }
-    return acc;
-  }, []);
-
+  let uniqueCategories =  data.map((item) => ( item.category));
+  
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -42,7 +37,7 @@ function Table(props) {
   useEffect(() => {
     if (selectedOption !== null) {
       const result = data.filter((product) => {
-        const values = Object.values(product).join().toLowerCase();
+        const values = Object.values(product.category).join().toLowerCase();
         return values.includes(selectedOption.toLowerCase());
       });
       setTempData(result);
@@ -77,9 +72,11 @@ function Table(props) {
                 {/* <option value="1"></option> */}
 
                 <option value="1">Choose category</option>
+                
                 {uniqueCategories.map((item) => (
-                  <option value={item} className="text-capitalize">{item}</option>
+                  <option value={item._id} className="text-capitalize">{item.name}</option>
                 ))}
+       
               </select>
               <input
                 type="text"

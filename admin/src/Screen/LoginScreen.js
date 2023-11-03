@@ -80,8 +80,15 @@ const Login = () => {
 
       // dispatch(updateUser({ data }))
     } else if (error) {
-      if (!toast.isActive(toastId.current)) {
-        toastId.current = toast.error("Lỗi", Toastobjects);
+      if(error.code === "ERR_NETWORK"){
+        if (!toast.isActive(toastId.current)) {
+          toastId.current = toast.error("Lỗi phía máy chủ", Toastobjects);
+        }
+      }
+      else if(error.code === "ERR_BAD_REQUEST"){
+        if (!toast.isActive(toastId.current)) {
+          toastId.current = toast.error("Sai tài khoản hoặc mật khẩu", Toastobjects);
+        }
       }
     }
 

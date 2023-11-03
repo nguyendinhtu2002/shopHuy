@@ -10,8 +10,8 @@ const router = express.Router();
 const { protect, admin } = require("../middleware/AuthMiddleware");
 
 router.post("/", protect, admin, createCategory);
-router.get("/getAll", getAllCategory);
+router.get("/", getAllCategory);
 router.get("/getById/:id", getById);
 router.put("/update/:id", protect, admin, updateCategory);
-router.delete("/detele/:id", protect, admin,  deleteCategory);
+router.delete("/:id", protect, admin,  deleteCategory);
 module.exports = router;

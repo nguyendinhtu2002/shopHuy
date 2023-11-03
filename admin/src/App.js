@@ -77,7 +77,6 @@ function App() {
       // console.log(decoded?.exp < currentTime.getTime() / 1000)
       if (decoded?.exp < currentTime.getTime() / 1000) {
         const data = await UserService.refreshToken(token_refresh);
-        console.log(data)
 
         config.headers["Authorization"] = `Bearer ${data?.access_token}`;
       }
