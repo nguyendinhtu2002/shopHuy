@@ -2,16 +2,17 @@ import React, {useState} from "react"
 import {Link} from "react-router-dom";
 import AccountInformation from "./AccountInformation";
 import AddressDelivery from "./AddressDelivery";
-import HistoryOrder from "./HistoryOrder";
+import HistoryProduct from "./HistoryProduct";
 import user from "../../assets/user.png"
 import icon_profile from "../../assets/icon_profile.png"
 import icon_history from "../../assets/icon_history.png"
 import icon_marker from "../../assets/icon_marker.png"
+import HistoryOrder from "./HistoryOrder";
 function SliderInfo() {
     const [isAccountInformation, setAccountInformation] = useState()
     const [isHistoryOrders, setHistoryOrders] = useState()
     const [isAddressDelivery, setAddressDelivery] = useState()
-
+    const [isClick, setClick] = useState(false)
     const handleAccountInformation = () => {
         setAccountInformation(true)
         setHistoryOrders(false)
@@ -21,6 +22,7 @@ function SliderInfo() {
         setAccountInformation(false)
         setHistoryOrders(true)
         setAddressDelivery(false)
+        setClick(false)
     }
     const handleAddressDelivery = () => {
         setAccountInformation(false)
@@ -51,7 +53,7 @@ function SliderInfo() {
                     <li>
                         <div className="relative">
                             <input className="peer hidden" id="radio_2" type="radio" name="radio"
-                                   onClick={handleHistoryOrders}/>
+                                   onChange={handleHistoryOrders}/>
                             <label
                                 className="peer-checked:border-2 peer-checked:border-[#0500FF] flex cursor-pointer select-none border border-gray-300 p-4"
                                 htmlFor="radio_2">
@@ -80,7 +82,7 @@ function SliderInfo() {
             </div>
             <div className="pt-8 px-4 lg:col-span-3">
                 {isAccountInformation && <AccountInformation/>}
-                {isHistoryOrders && <HistoryOrder/>}
+                {isHistoryOrders && <HistoryOrder clicked={isClick}/>}
                 {isAddressDelivery && <AddressDelivery/>}
             </div>
         </>
