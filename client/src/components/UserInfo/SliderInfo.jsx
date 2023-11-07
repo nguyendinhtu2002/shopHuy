@@ -8,11 +8,17 @@ import icon_profile from "../../assets/icon_profile.png"
 import icon_history from "../../assets/icon_history.png"
 import icon_marker from "../../assets/icon_marker.png"
 import HistoryOrder from "./HistoryOrder";
+import {updateUser} from "../../features/userSlide/userSlide";
+import {useDispatch} from "react-redux";
+import {resetUserInfo} from "../../store/userInfoSlice";
 function SliderInfo() {
+    const dispatch = useDispatch();
+
     const [isAccountInformation, setAccountInformation] = useState()
     const [isHistoryOrders, setHistoryOrders] = useState()
     const [isAddressDelivery, setAddressDelivery] = useState()
     const [isClick, setClick] = useState(false)
+
     const handleAccountInformation = () => {
         setAccountInformation(true)
         setHistoryOrders(false)
@@ -23,6 +29,8 @@ function SliderInfo() {
         setHistoryOrders(true)
         setAddressDelivery(false)
         setClick(false)
+        dispatch(resetUserInfo());
+
     }
     const handleAddressDelivery = () => {
         setAccountInformation(false)
@@ -53,7 +61,7 @@ function SliderInfo() {
                     <li>
                         <div className="relative">
                             <input className="peer hidden" id="radio_2" type="radio" name="radio"
-                                   onChange={handleHistoryOrders}/>
+                                   onClick={handleHistoryOrders}/>
                             <label
                                 className="peer-checked:border-2 peer-checked:border-[#0500FF] flex cursor-pointer select-none border border-gray-300 p-4"
                                 htmlFor="radio_2">

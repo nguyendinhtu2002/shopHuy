@@ -1,18 +1,17 @@
 import React, {useState} from 'react'
 import HistoryProduct from "./HistoryProduct";
+import {useDispatch, useSelector} from "react-redux";
+import {updateUserInfo} from "../../store/userInfoSlice";
 
 function HistoryOrder(props) {
-    console.log(props.clicked)
-    const [isClick, setClick] = useState(props.clicked)
-
+    const dispatch = useDispatch();
+    const {status} = useSelector((state) => state.userInfo);
     const handleClick = () => {
-        setClick(!isClick)
+        dispatch(updateUserInfo());
     }
-
-
     return (
         <>
-            {!isClick&&
+            {!status &&
                 (
                     <>
                         <div className="container h-screen">
@@ -39,8 +38,8 @@ function HistoryOrder(props) {
                 )
             }
 
-            {isClick&&
-            <HistoryProduct/>
+            {status&&
+            <HistoryProduct />
             }
         </>
     )

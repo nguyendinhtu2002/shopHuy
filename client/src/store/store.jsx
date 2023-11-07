@@ -5,6 +5,7 @@ import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 import searchReducer from "./searchSlice";
 import userReducers from '../features/userSlide/userSlide'
+import  userInfoSlide from "./userInfoSlice";
 import {
   persistStore,
   persistReducer,
@@ -29,7 +30,7 @@ const rootReducer = combineReducers({
     product: productReducer,
     cart: cartReducer,
     search: searchReducer,
-
+    userInfo: userInfoSlide,
 })
 
 

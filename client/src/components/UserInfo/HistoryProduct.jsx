@@ -4,7 +4,10 @@ function HistoryProduct() {
     return (
         <>
             <div className="">
-                <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C]">Lịch sử mua hàng</h1>
+                <h1 className="text-3xl font-semibold border-b-2 border-[#D52C2C] space-x-3"><span>Lịch sử mua hàng</span>
+                    <span>-</span>
+                    <span>64e21391f7de058f6f2e9e05</span>
+                </h1>
 
                 <div className="cat-products-content">
                     <div className="product-lists-history grid bg-whitesmoke my-3 "><a className="block"
