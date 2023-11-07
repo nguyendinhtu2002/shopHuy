@@ -1,4 +1,6 @@
 const Order = require("../models/Order");
+const Product = require("../models/Product");
+
 const Joi = require("joi");
 
 const createOrder = async (req, res, next) => {
@@ -105,7 +107,7 @@ const getOrderByCode = async (req, res, next) => {
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
     }
-
+  
     return res.status(200).json(order.products);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });

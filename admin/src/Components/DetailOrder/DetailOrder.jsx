@@ -65,16 +65,6 @@ const DetailOrder = (props) => {
   };
   const columns = [
     {
-      name: "Mã sản phẩm",
-      selector: (row) => (
-        <div>
-          <Link to={`/orders/show/${row.orderCode}`} className="text-decoration-none">
-            {row.orderCode}
-          </Link>
-        </div>
-      ),
-    },
-    {
       name: "Tên sản phẩm",
       selector: (row) => row.local,
     },
