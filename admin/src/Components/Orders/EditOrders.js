@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Toast from "../LoadingError/Toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Message from "../LoadingError/Error";
@@ -9,14 +9,17 @@ import * as PayService from "../../Services/OrderSevice";
 import { fetchAsyncProductSingle } from "../../features/productSlide/productSlice";
 import { useMutationHooks } from "../../hooks/useMutationHooks";
 import { updateProductSingle } from "../../features/productSlide/ProductSliceNew";
+import CartMessage from "../CartMessage/CartMessage";
 
 const EditOrderMain = (props) => {
   const { id } = props;
+  const history = useNavigate();
 
   const [address, setAddress] = useState("");
   const [quantity, setQuatity] = useState(0);
 
   const [status, setStatus] = useState(false);
+  const [showMessage,setShowMessage] = useState(false);
 
   const toastId = React.useRef(null);
   const Toastobjects = {
@@ -43,8 +46,7 @@ const EditOrderMain = (props) => {
     PayService.updatePay(id, rests, access_token);
   });
   const { data, error, isLoading, isError, isSuccess } = mutation;
-  const handleUpdate = (e) => {
-    e.preventDefault();
+  const handleUpdate = () => {
     const access_token = localStorage.getItem("access_token");
     const convert_acces_token = JSON.parse(access_token);
     mutation.mutate({
@@ -63,6 +65,10 @@ const EditOrderMain = (props) => {
     if (!error && isSuccess) {
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Thành công!", Toastobjects);
+        setShowMessage(true);
+        setTimeout(() => {
+          history('/orders'); 
+        }, 1000); 
       }
     } else if (error) {
       if (!toast.isActive(toastId.current)) {
@@ -75,7 +81,7 @@ const EditOrderMain = (props) => {
   }, [id, error, isSuccess]);
   return (
     <>
-      <Toast />
+      {/* <Toast /> */}
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={handleUpdate}>
           <div className="content-header">
@@ -131,14 +137,14 @@ const EditOrderMain = (props) => {
                           onChange={(e) => setStatus(e.target.value)}
                         >
                           <option
-                            value="pending"
-                            selected={status === "pending"}
+                            value={false}
+                            selected={status === false}
                           >
                             Chưa hoàn thành
                           </option>
                           <option
-                            value="delivered"
-                            selected={status === "delivered"}
+                            value={true}
+                            selected={status === true}
                           >
                             Hoàn thành
                           </option>
@@ -159,11 +165,13 @@ const EditOrderMain = (props) => {
             Quay về
           </Link>
           <div>
-            <button type="submit" className="btn btn-success">
+            <button type="button" className="btn btn-success" onClick={()=> handleUpdate()}>
               Hoàn thành
             </button>
           </div>
         </div>
+        {showMessage && <CartMessage text = "Sửa thành thành công" />}
+
       </section>
     </>
   );
