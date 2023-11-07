@@ -1,14 +1,30 @@
 const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema({
-  idProduct: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
+  orderCode: {
+    type: String,
     require: true,
   },
-  quantity: {
+  products: [
+    {
+      idProduct: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      quantity: {
+        type: Number,
+        required: true,
+        default: 0,
+      },
+      price: {
+        type: Number,
+        required: true,
+        default: 0,
+      },
+    },
+  ],
+  totalQuantity: {
     type: Number,
-    require: true,
     default: 0,
   },
   idUser: {
@@ -20,22 +36,40 @@ const orderSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  numberPhone:{
-    type:Number,
-    require:true,
-    default:""
+  numberPhone: {
+    type: Number,
+    require: true,
+    default: "",
   },
-  price:{
-    type:Number,
-    require:true,
-    default:0
+  totalPrice: {
+    type: Number,
+    require: true,
+    default: 0,
   },
   createAt: {
     type: Date,
-    default: Date.now 
-}
+    default: Date.now,
+  },
 });
 
+orderSchema.pre("save", async function (next) {
+  if (!this.orderCode) {
+    const highestProduct = await this.constructor.findOne(
+      {},
+      { orderCode: 1 },
+      { sort: { orderCode: -1 } }
+    );
+
+    if (highestProduct) {
+      const lastorderCode = highestProduct.orderCode;
+      const lastNumber = parseInt(lastorderCode.substr(2), 10);
+      this.orderCode = `OD${lastNumber + 1}`;
+    } else {
+      this.orderCode = "OD1";
+    }
+  }
+  next();
+});
 
 const Order = mongoose.model("Order", orderSchema);
 

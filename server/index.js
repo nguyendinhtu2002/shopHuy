@@ -12,7 +12,7 @@ const PaymentRouter = require("./routers/Payment")
 dotenv.config();
 connectDatabase();
 
-const allowedOrigins = ['http://localhost:3000','http://localhost:9000'];
+const allowedOrigins = ['http://localhost:4000','http://localhost:9000'];
 app.use(cors({
     origin: allowedOrigins,
     credentials: true,

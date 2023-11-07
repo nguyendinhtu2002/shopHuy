@@ -5,7 +5,11 @@ import Orders from "./Orders";
 import { useSelector } from "react-redux";
 import * as OrderService from "../../Services/OrderSevice";
 import { error } from "jquery";
-const OrderMain = () => {
+import DetailOrder from "../DetailOrder/DetailOrder";
+const ShowOrder = (props) => {
+  const { code } = props;
+  console.log("🚀 ~ file: ShowOrder.js:10 ~ ShowOrder ~ props:", props)
+  console.log("🚀 ~ file: ShowOrder.js:10 ~ ShowOrder ~ code:", code)
   //   const orderList = useSelector((state) => state.orderList);
   //   const { loading, error, orders } = orderList;
   const [loading, setLoading] = useState("");
@@ -15,8 +19,8 @@ const OrderMain = () => {
 
   const hangldeGetAll = async () => {
     setLoading(true);
-    const access_token = localStorage.getItem("access_token")
-    await OrderService.getPay(JSON.parse(access_token))
+    const access_token = localStorage.getItem("access_token");
+    await OrderService.getOrderDetailByCode(code)
       .then((res) => {
         setLoading(false);
         setTempData(res);
@@ -24,7 +28,6 @@ const OrderMain = () => {
       .catch((error) => {
         setError(error);
       });
-
   };
   useEffect(() => {
     if (search === "") {
@@ -41,9 +44,8 @@ const OrderMain = () => {
     <>
       <section className="content-main">
         <div className="content-header">
-          <h2 className="content-title">Đơn đặt hàng</h2>
+          <h2 className="content-title">Chi tiết đơn đặt hàng</h2>
         </div>
-
         <div className="card mb-4 shadow-sm">
           <div className="card-body">
             <div className="table-responsive">
@@ -52,7 +54,7 @@ const OrderMain = () => {
               ) : error ? (
                 <Message variant="alert-danger">{error}</Message>
               ) : (
-                <Orders data={tempData} search={search} />
+                <DetailOrder data={tempData} search={search} />
               )}
             </div>
           </div>
@@ -62,4 +64,4 @@ const OrderMain = () => {
   );
 };
 
-export default OrderMain;
+export default ShowOrder;

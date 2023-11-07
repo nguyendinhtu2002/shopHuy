@@ -36,6 +36,7 @@ import jwt_decode from "jwt-decode";
 import { isJsonString } from "./utils";
 import EditPaymentMain from "./Components/Payment/EditPayment";
 import EditPaymentScreen from "./Screen/EditPaymentScreen";
+import ShowOrderScreen from "./Screen/ShowOrderScreen";
 
 function App() {
   const userLogin = useSelector((state) => state.user);
@@ -96,17 +97,17 @@ function App() {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<HomeScreen />} />
-          <Route path="/products" element={<ProductScreen />} />
-          <Route path="/addproduct" element={<AddProduct />} />
-          <Route path="/orders" element={<OrderScreen />} />
-          <Route path="/users" element={<UserScreen />} />
-          <Route path="/category" element={<CategoryScreen />} />
-          <Route path="/addcategory" element={<AddCategory />} />
 
+          <Route path="/users" element={<UserScreen />} />
           <Route path="/users/:id/edit" element={<EditUserScreen />} />
 
+          <Route path="/products" element={<ProductScreen />} />
+          <Route path="/addproduct" element={<AddProduct />} />
           <Route path="/product/:id/edit" element={<EditProductScreen />} />
+
+          <Route path="/orders" element={<OrderScreen />} />
           <Route path="/orders/:id/edit" element={<EditOrdersScreen />} />
+          <Route path="/orders/show/:code/" element={<ShowOrderScreen />} />
 
           <Route path="/payment" element={<PaymentScreen />} />
           <Route path="/payment/:id/edit" element={<EditPaymentScreen />} />
@@ -118,7 +119,8 @@ function App() {
           <Route path="/message" element={<MessageScreen />} />
           <Route path="/message/:id/edit" element={<EditMessageScreen />} />
 
-
+          <Route path="/category" element={<CategoryScreen />} />
+          <Route path="/addcategory" element={<AddCategory />} />
         </Route>
         <Route path="/login" element={<LoginScreen />} />
       </Routes>

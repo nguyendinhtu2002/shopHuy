@@ -9,21 +9,20 @@ import { toast } from "react-toastify";
 import Toast from "../LoadingError/Toast";
 import CustomModal from "../Modal/Modal";
 
-const Orders = (props) => {
+const DetailOrder = (props) => {
   const { data } = props;
   const [loading, setLoading] = useState("");
   const [tempData, setTempData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
-  const [id, setId] = useState("");
+
   const handleClose = () => {
     setShowModal(false);
     setIsDeleteConfirmed(false);
   };
-  const confirmDelete = (id) => {
+  const confirmDelete = () => {
     setIsDeleteConfirmed(true);
     setShowModal(true);
-    setId(id);
   };
   const [error, setError] = useState("");
   const toastId = React.useRef(null);
@@ -38,7 +37,7 @@ const Orders = (props) => {
   };
   const hangldeGetAll = async () => {
     setLoading(true);
-    await OrderService.getPay()
+    await OrderService.getOrderDetailByCode()
       .then((res) => {
         setLoading(false);
         setTempData(res);
@@ -54,11 +53,8 @@ const Orders = (props) => {
           if (!toast.isActive(toastId.current)) {
             toastId.current = toast.success("Thành công!", Toastobjects);
           }
-          setShowModal(false);
           hangldeGetAll();
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          window.location.reload();
         })
         .catch((error) => {
           if (!toast.isActive(toastId.current)) {
@@ -69,50 +65,26 @@ const Orders = (props) => {
   };
   const columns = [
     {
-      name: "Mã đơn hàng",
+      name: "Mã sản phẩm",
       selector: (row) => (
         <div>
-          <Link
-            to={`/orders/show/${row.orderCode}`}
-            className="text-decoration-none"
-          >
+          <Link to={`/orders/show/${row.orderCode}`} className="text-decoration-none">
             {row.orderCode}
           </Link>
         </div>
       ),
     },
     {
-      name: "Địa chỉ giao hàng",
+      name: "Tên sản phẩm",
       selector: (row) => row.local,
     },
     {
-      name: "Số lượng",
-      selector: (row) => row.totalQuantity,
+      name: "Giá sản phẩm",
+      selector: (row) => row.quantity,
     },
     {
-      name: "Tổng tiền",
-      selector: (row) => row.totalPrice,
-    },
-    {
-      name: "Action",
-      selector: (row) => (
-        <div className="d-flex" style={{ width: "450px" }}>
-          <Link
-            to={`/orders/${row._id}/edit`}
-            style={{ marginRight: "5px" }}
-            // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
-          >
-            <button className="btn btn-warning">Sửa</button>
-          </Link>
-          <button
-            type="button"
-            onClick={() => confirmDelete(row._id)}
-            className="btn btn-danger"
-          >
-            Xóa
-          </button>
-        </div>
-      ),
+      name: "Số lượng",
+      selector: (row) => row.price,
     },
   ];
   return (
@@ -120,12 +92,12 @@ const Orders = (props) => {
       <Toast />
       <CustomModal
         show={showModal}
-        handleClose={() => handleClose()}
-        handleDelete={() => handleDelete(id)}
+        handleClose={handleClose}
+        handleDelete={handleDelete}
       />
       <Table data={data} columns={columns} sub={false} />
     </>
   );
 };
 
-export default Orders;
+export default DetailOrder;

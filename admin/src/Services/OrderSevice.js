@@ -32,7 +32,19 @@ export const updatePay = async (id, data,access_token) => {
   return res.data;
 };
 
-export const deletePay = async (id) => {
-  const res = await axios.delete(`${API}/api/v1/pay/${id}`);
+export const deleteOrder = async (id) => {
+  const res = await axios.delete(`${API}/api/v1/order/${id}`);
   return res.data;
 };
+
+export const getOrderDetailByCode = async (code) => {
+  try {
+    // const headers = {
+    //   Authorization: `Bearer ${access_token}`,
+    // };
+    const res = await axiosJWT.get(`${API}/api/v1/order/getByCode/${code}`);
+    return res.data;
+  } catch (error) {
+      console.log(error)
+  }
+}

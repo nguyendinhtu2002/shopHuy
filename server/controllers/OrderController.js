@@ -4,20 +4,26 @@ const Joi = require("joi");
 const createOrder = async (req, res, next) => {
   try {
     const schema = Joi.object({
-      idProduct: Joi.string().required(),
+      products: Joi.array().required(),
       idUser: Joi.string().required(),
-      quantity: Joi.number().required().min(0),
       local: Joi.string().required(),
       numberPhone: Joi.number().required(),
-      price: Joi.number().required(),
     });
     const { error } = schema.validate(req.body);
 
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-
-    const newOrder = new Order(req.body);
+    const { products } = req.body;
+    let totalPrice = 0;
+    let totalQuantity = 0;
+    if (products && products.length > 0) {
+      products.forEach((element) => {
+        totalPrice += element.price;
+        totalQuantity += element.quantity;
+      });
+    }
+    const newOrder = new Order({ ...req.body, totalPrice, totalQuantity });
     const savedOrder = await newOrder.save();
     return res.status(201).json(savedOrder);
   } catch (error) {
@@ -47,7 +53,6 @@ const getAllOrder = async (req, res, next) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
-
 const updateOrder = async (req, res, next) => {
   try {
     const orderId = req.params.orderId;
@@ -82,10 +87,8 @@ const updateOrder = async (req, res, next) => {
 };
 const deleteOrder = async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
-
+    const orderId = req.params.id;
     const deletedOrder = await Order.findByIdAndRemove(orderId);
-
     if (!deletedOrder) {
       return res.status(404).json({ error: "Order not found" });
     }
@@ -95,11 +98,24 @@ const deleteOrder = async (req, res, next) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+const getOrderByCode = async (req, res, next) => {
+  try {
+    const code = req.params.code;
+    const order = await Order.findOne({orderCode:code});
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
 
+    return res.status(200).json(order.products);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
 module.exports = {
   createOrder,
   getOrderById,
   getAllOrder,
   updateOrder,
   deleteOrder,
+  getOrderByCode
 };

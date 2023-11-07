@@ -2,8 +2,9 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 const CustomModal = ({ show, handleClose, handleDelete }) => {
+    console.log("🚀 ~ file: Modal.js:5 ~ CustomModal ~ handleClose:", handleClose)
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
                 <Modal.Title>Xác nhận xóa sản phẩm</Modal.Title>
             </Modal.Header>
@@ -12,7 +13,7 @@ const CustomModal = ({ show, handleClose, handleDelete }) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Hủy
                 </Button>
-                <Button variant="primary" onClick={handleDelete}>
+                <Button variant="danger" onClick={handleDelete}>
                     Xóa
                 </Button>
             </Modal.Footer>

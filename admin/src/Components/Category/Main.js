@@ -108,7 +108,7 @@ const MainCategory = () => {
               <Loading />
             ) : (
               <div className="row">
-                <Table data={tempData} columns={columns} sub={true} />
+                <Table data={tempData} columns={columns} sub={false} />
               </div>
             )}
           </div>

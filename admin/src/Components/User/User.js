@@ -87,7 +87,7 @@ const Users = (props) => {
   return (
     <>
       <Toast />
-      <Table data={data} columns={columns} sub={true} />
+      <Table data={data} columns={columns} sub={false} />
     </>
     // <DataTable
     //   columns={columns}

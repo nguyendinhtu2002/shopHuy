@@ -52,7 +52,7 @@ export const fetchAsyncProducts = createAsyncThunk("products/fetch", async () =>
 
 // nhận dữ liệu sản phẩm duy nhất
 export const fetchAsyncProductSingle = createAsyncThunk("product-single/fetch", async (id) => {
-  const response = await fetch(`${API}/api/v1/product/getById/${id}`);
+  const response = await fetch(`${API}/api/v1/product/${id}`);
   const data = await response.json();
   return data;
 });

@@ -35,7 +35,7 @@ function Table(props) {
     }
   }, [search]);
   useEffect(() => {
-    if (selectedOption !== null) {
+    if (selectedOption !== null && sub) {
       const result = data.filter((product) => {
         const values = Object.values(product.category).join().toLowerCase();
         return values.includes(selectedOption.toLowerCase());
@@ -73,7 +73,7 @@ function Table(props) {
 
                 <option value="1">Choose category</option>
                 
-                {uniqueCategories.map((item) => (
+                {uniqueCategories?.map((item) => (
                   <option value={item._id} className="text-capitalize">{item.name}</option>
                 ))}
        

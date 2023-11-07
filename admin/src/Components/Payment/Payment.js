@@ -110,7 +110,7 @@ const Payment = (props) => {
   return (
     <>
       <Toast />
-      <Table data={data} columns={columns} sub={true} />
+      <Table data={data} columns={columns} sub={false} />
     </>
   );
 };

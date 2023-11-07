@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Toast from "./../LoadingError/Toast";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Message from "../LoadingError/Error";
@@ -10,6 +10,7 @@ import { fetchAsyncProductSingle } from "../../features/productSlide/productSlic
 import { useMutationHooks } from "../../hooks/useMutationHooks";
 import { updateProductSingle } from "../../features/productSlide/ProductSliceNew";
 import { useQuery } from "react-query";
+import CartMessage from "../CartMessage/CartMessage";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
@@ -20,6 +21,7 @@ const ToastObjects = {
 
 const EditProductMain = (props) => {
   const { id } = props;
+  const history = useNavigate();
 
   const [name, setName] = useState("");
   const [rate, setRate] = useState(0);
@@ -78,6 +80,11 @@ const EditProductMain = (props) => {
   useEffect(()=>{
     if (error === null && isSuccess) {
       setShowMessage(true);
+      const timeoutId = setTimeout(() => {
+        history('/products'); 
+      }, 1000); 
+
+      return () => clearTimeout(timeoutId);
     }
   },[error, isSuccess])
   return (
@@ -248,6 +255,7 @@ const EditProductMain = (props) => {
             </div>
           </div>
         </form>
+        {showMessage && <CartMessage text = "Sửa thành thành công" />}
       </section>
     </>
   );

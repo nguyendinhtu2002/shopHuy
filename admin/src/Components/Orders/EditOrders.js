@@ -12,10 +12,10 @@ import { updateProductSingle } from "../../features/productSlide/ProductSliceNew
 
 const EditOrderMain = (props) => {
   const { id } = props;
- 
+
   const [address, setAddress] = useState("");
   const [quantity, setQuatity] = useState(0);
- 
+
   const [status, setStatus] = useState(false);
 
   const toastId = React.useRef(null);
@@ -30,9 +30,8 @@ const EditOrderMain = (props) => {
   };
   const dispatch = useDispatch();
 
-  const handleGetDetailsProduct = async (id,access_token) => {
-    
-    const res = await PayService.getDetilsPay(id,access_token);
+  const handleGetDetailsProduct = async (id, access_token) => {
+    const res = await PayService.getDetilsPay(id, access_token);
     setAddress(res.address_line1);
     setQuatity(res.products[0].quantity);
     setStatus(res.isSucces);
@@ -46,21 +45,21 @@ const EditOrderMain = (props) => {
   const { data, error, isLoading, isError, isSuccess } = mutation;
   const handleUpdate = (e) => {
     e.preventDefault();
-    const access_token=localStorage.getItem("access_token")
-    const convert_acces_token = JSON.parse(access_token)
+    const access_token = localStorage.getItem("access_token");
+    const convert_acces_token = JSON.parse(access_token);
     mutation.mutate({
       id,
       status,
-      access_token:convert_acces_token
+      access_token: convert_acces_token,
     });
 
     // mutation.mutate(decoded?.id, { phone, name, email, sex })
   };
-  
+
   useEffect(() => {
-    const access_token=localStorage.getItem("access_token")
-    
-    handleGetDetailsProduct(id,JSON.parse(access_token));
+    const access_token = localStorage.getItem("access_token");
+
+    handleGetDetailsProduct(id, JSON.parse(access_token));
     if (!error && isSuccess) {
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Thành công!", Toastobjects);
@@ -73,14 +72,16 @@ const EditOrderMain = (props) => {
         );
       }
     }
-  }, [id,error, isSuccess]);
+  }, [id, error, isSuccess]);
   return (
     <>
       <Toast />
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={handleUpdate}>
           <div className="content-header">
-            <h2 className="content-title text-capitalize">Sửa thông tin Đơn hàng</h2>
+            <h2 className="content-title text-capitalize">
+              Sửa thông tin Đơn hàng
+            </h2>
           </div>
 
           <div className="row">
@@ -123,18 +124,26 @@ const EditOrderMain = (props) => {
                           onChange={(e) => setQuatity(e.target.value)}
                         ></input>
                       </div> */}
-                        <div className="mb-4">
+                      <div className="mb-4">
                         <label className="form-label">Trạng thái</label>
                         <select
-                            className="form-control"
-                           
-                            onChange={(e) => setStatus(e.target.value)}
-                            >
-                            <option value="pending" selected={status==="pending"}>Chưa hoàn thành</option>
-                            <option value="delivered" selected={status==="delivered"}>Hoàn thành</option>
+                          className="form-control"
+                          onChange={(e) => setStatus(e.target.value)}
+                        >
+                          <option
+                            value="pending"
+                            selected={status === "pending"}
+                          >
+                            Chưa hoàn thành
+                          </option>
+                          <option
+                            value="delivered"
+                            selected={status === "delivered"}
+                          >
+                            Hoàn thành
+                          </option>
                         </select>
-                        </div>
-
+                      </div>
                     </>
                   )}
                 </div>
@@ -143,7 +152,10 @@ const EditOrderMain = (props) => {
           </div>
         </form>
         <div className="d-flex gap-1 justify-content-end">
-          <Link to="/orders" className="btn btn-outline-secondary border border-2 text-dark">
+          <Link
+            to="/orders"
+            className="btn btn-outline-secondary border border-2 text-dark"
+          >
             Quay về
           </Link>
           <div>
