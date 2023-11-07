@@ -5,7 +5,7 @@
   right: -10px;
   top: calc(100% + 10px);
   background-color: $clr-white;
-  width: 360px;
+  width: 404px;
   box-shadow: rgba(100, 100, 111, 0.25) 0px 7px 29px 0px;
   padding: 1.8rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -46,7 +46,7 @@
 
   &-list {
     .cart-modal-item {
-      grid-template-columns: 64px auto 65px;
+      grid-template-columns: 64px auto 90px;
       column-gap: 12px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
       &-img {
