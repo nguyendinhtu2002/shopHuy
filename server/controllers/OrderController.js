@@ -34,8 +34,8 @@ const createOrder = async (req, res, next) => {
 };
 const getOrderById = async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
-    const order = await Order.findById(orderId);
+    const id = req.params.id;
+    const order = await Order.findById(id);
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
     }
@@ -57,15 +57,10 @@ const getAllOrder = async (req, res, next) => {
 };
 const updateOrder = async (req, res, next) => {
   try {
-    const orderId = req.params.orderId;
+    const id = req.params.id;
 
     const schema = Joi.object({
-      idProduct: Joi.string(),
-      idUser: Joi.string(),
-      quantity: Joi.number().min(0),
-      local: Joi.string(),
-      numberPhone: Joi.number(),
-      price: Joi.number(),
+      status: Joi.boolean(),
     });
 
     const { error } = schema.validate(req.body);
@@ -74,7 +69,7 @@ const updateOrder = async (req, res, next) => {
       return res.status(400).json({ error: error.details[0].message });
     }
 
-    const updatedOrder = await Order.findByIdAndUpdate(orderId, req.body, {
+    const updatedOrder = await Order.findByIdAndUpdate(id, req.body, {
       new: true,
     });
 

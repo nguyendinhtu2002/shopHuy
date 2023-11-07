@@ -94,6 +94,10 @@ const Orders = (props) => {
       selector: (row) => row.totalPrice,
     },
     {
+      name: "Trạng thái",
+      selector: (row) => row.status ? "Hoàn thành" : "Chưa hoàn thành",
+    },
+    {
       name: "Action",
       selector: (row) => (
         <div className="d-flex" style={{ width: "450px" }}>
