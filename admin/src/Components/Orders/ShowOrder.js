@@ -52,7 +52,7 @@ const ShowOrder = (props) => {
               ) : error ? (
                 <Message variant="alert-danger">{error}</Message>
               ) : (
-                <DetailOrder data={tempData} search={search} />
+                <DetailOrder data={tempData} search={search} code={code} />
               )}
             </div>
           </div>
