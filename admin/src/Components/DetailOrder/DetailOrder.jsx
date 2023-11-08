@@ -65,8 +65,12 @@ const DetailOrder = (props) => {
   };
   const columns = [
     {
+      name: "Mã sản phẩm",
+      selector: (row) => row.idProduct.productCode,
+    },
+    {
       name: "Tên sản phẩm",
-      selector: (row) => row.local,
+      selector: (row) => row.idProduct.name,
     },
     {
       name: "Giá sản phẩm",
@@ -75,6 +79,27 @@ const DetailOrder = (props) => {
     {
       name: "Số lượng",
       selector: (row) => row.price,
+    },
+    {
+      name: "Action",
+      selector: (row) => (
+        <div className="d-flex" style={{ width: "450px" }}>
+          <Link
+            to={`/orders/${row._id}/edit`}
+            style={{ marginRight: "5px" }}
+            // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
+          >
+            <button className="btn btn-warning">Sửa</button>
+          </Link>
+          <button
+            type="button"
+            onClick={() => confirmDelete(row._id)}
+            className="btn btn-danger"
+          >
+            Xóa
+          </button>
+        </div>
+      ),
     },
   ];
   return (

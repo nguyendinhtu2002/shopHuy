@@ -2,7 +2,6 @@ import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
 const CustomModal = ({ show, handleClose, handleDelete }) => {
-    console.log("🚀 ~ file: Modal.js:5 ~ CustomModal ~ handleClose:", handleClose)
     return (
         <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>

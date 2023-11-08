@@ -4,15 +4,23 @@ import CustomModal from "../Modal/Modal";
 import Button from "./Button";
 import CustomSelect from "./Select";
 import { useLocation } from "react-router-dom";
+import CartMessage from "../CartMessage/CartMessage";
 
 function Table(props) {
-  const { data, columns, sub, loading } = props;
+  const { data, columns, sub, loading, showMessage } = props;
   const [search, setSearch] = useState("");
   const [datas, setTempData] = useState(data);
   const [selectedOption, setSelectedOption] = useState("");
   const location = useLocation();
-  let uniqueCategories =  data.map((item) => ( item.category));
-  
+  console.log("🚀 ~ file: Table.js:16 ~ Table ~ data:", data)
+  let uniqueCategories;
+  if(data.products){
+    uniqueCategories = data.products.map((item) => item.category);
+  } else{
+    uniqueCategories = data.map((item) => item.category);
+
+  }
+
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -72,11 +80,12 @@ function Table(props) {
                 {/* <option value="1"></option> */}
 
                 <option value="1">Choose category</option>
-                
+
                 {uniqueCategories?.map((item) => (
-                  <option value={item._id} className="text-capitalize">{item.name}</option>
+                  <option value={item._id} className="text-capitalize">
+                    {item.name}
+                  </option>
                 ))}
-       
               </select>
               <input
                 type="text"
@@ -91,16 +100,19 @@ function Table(props) {
           }
         ></DataTable>
       ) : (
-        <DataTable
-          columns={columns}
-          data={data}
-          pagination
-          fixedHeader
-          fixedHeaderScrollHeight="450px"
-          progressComponent
-          selectableRows
-          selectableRowsHighlight
-        />
+        <div>
+          <DataTable
+            columns={columns}
+            data={data}
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight="450px"
+            progressComponent
+            selectableRows
+            selectableRowsHighlight
+          />
+          {showMessage && <CartMessage text="Xoá thành công" />}
+        </div>
       )}
     </>
   );

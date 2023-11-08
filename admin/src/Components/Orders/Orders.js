@@ -8,6 +8,7 @@ import * as OrderService from "../../Services/OrderSevice";
 import { toast } from "react-toastify";
 import Toast from "../LoadingError/Toast";
 import CustomModal from "../Modal/Modal";
+import CartMessage from "../CartMessage/CartMessage";
 
 const Orders = (props) => {
   const { data } = props;
@@ -15,6 +16,8 @@ const Orders = (props) => {
   const [tempData, setTempData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+
   const [id, setId] = useState("");
   const handleClose = () => {
     setShowModal(false);
@@ -47,6 +50,21 @@ const Orders = (props) => {
         setError(error);
       });
   };
+  const convertDate = (text) => {
+    const date = new Date(text);
+
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    };
+
+    const formattedDate = date.toLocaleDateString("en-US", options);
+    return formattedDate;
+  };
   const handleDelete = async (id) => {
     if (id) {
       await OrderService.deleteOrder(id)
@@ -55,6 +73,7 @@ const Orders = (props) => {
             toastId.current = toast.success("Thành công!", Toastobjects);
           }
           setShowModal(false);
+          setShowMessage(true);
           hangldeGetAll();
           setTimeout(() => {
             window.location.reload();
@@ -86,7 +105,7 @@ const Orders = (props) => {
       selector: (row) => row.local,
     },
     {
-      name: "Số lượng",
+      name: "Số lượng sản phẩm",
       selector: (row) => row.totalQuantity,
     },
     {
@@ -94,8 +113,12 @@ const Orders = (props) => {
       selector: (row) => row.totalPrice,
     },
     {
+      name: "Thời gian đặt hàng",
+      selector: (row) => convertDate(row.createAt),
+    },
+    {
       name: "Trạng thái",
-      selector: (row) => row.status ? "Hoàn thành" : "Chưa hoàn thành",
+      selector: (row) => (row.status ? "Hoàn thành" : "Chưa hoàn thành"),
     },
     {
       name: "Action",
@@ -121,13 +144,18 @@ const Orders = (props) => {
   ];
   return (
     <>
-      <Toast />
+      {/* <Toast /> */}
       <CustomModal
         show={showModal}
         handleClose={() => handleClose()}
         handleDelete={() => handleDelete(id)}
       />
-      <Table data={data} columns={columns} sub={false} />
+      <Table
+        data={data}
+        columns={columns}
+        sub={false}
+        showMessage={showMessage}
+      />
     </>
   );
 };

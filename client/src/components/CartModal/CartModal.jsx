@@ -5,7 +5,6 @@ import { formatPrice } from "../../utils/helpers";
 import { Link } from "react-router-dom";
 
 const CartModal = ({ carts }) => {
-  console.log("🚀 ~ file: CartModal.jsx:8 ~ CartModal ~ carts:", carts)
   return (
     <div className="cart-modal">
       <h5 className="cart-modal-title fw-5 fs-15 font-manrope text-center">

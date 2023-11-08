@@ -98,12 +98,19 @@ const deleteOrder = async (req, res, next) => {
 const getOrderByCode = async (req, res, next) => {
   try {
     const code = req.params.code;
-    const order = await Order.findOne({orderCode:code});
+    const order = await Order.findOne({ orderCode: code }).populate({
+      path: "products.idProduct",
+      select: "name productCode",
+    });
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
     }
-  
-    return res.status(200).json(order.products);
+    const { products, status } = order;
+    const productsArray = products.map((item) => ({
+      ...item.toObject(),
+      status,
+    }));
+    return res.status(200).json(productsArray);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
@@ -114,5 +121,5 @@ module.exports = {
   getAllOrder,
   updateOrder,
   deleteOrder,
-  getOrderByCode
+  getOrderByCode,
 };
