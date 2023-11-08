@@ -88,7 +88,7 @@ const DetailOrder = (props) => {
   if(data && data.length>0 ){
     if(data[0].status == false){
       columns.push( {
-        name: "Action",
+        name: "Hành động",
         selector: (row) => {
           console.log("🚀 ~ file: DetailOrder.jsx:90 ~ DetailOrder ~ row:", row)
           return (
