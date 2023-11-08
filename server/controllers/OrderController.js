@@ -10,6 +10,7 @@ const createOrder = async (req, res, next) => {
       idUser: Joi.string().required(),
       local: Joi.string().required(),
       numberPhone: Joi.number().required(),
+      note: Joi.string()
     });
     const { error } = schema.validate(req.body);
 
@@ -115,6 +116,34 @@ const getOrderByCode = async (req, res, next) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+const delteOrdeByCode = async (req, res, next) => {
+  try {
+    const code = req.params.code;
+    const { productIdToRemove } = req.body;
+    console.log("🚀 ~ file: OrderController.js:122 ~ delteOrdeByCode ~ productIdToRemove:", productIdToRemove)
+
+    const order = await Order.findOneAndUpdate(
+      { orderCode: code },
+      {
+        $pull: { products: { idProduct: productIdToRemove } },
+        $inc: {
+          totalPrice: -2000000,
+          totalQuantity: -2,
+        },
+      },
+      { new: true }
+    );
+
+    if (!order) {
+      return res.status(404).json({ error: "Order or product not found" });
+    }
+
+    return res.status(200).json({ message: "Order updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 module.exports = {
   createOrder,
   getOrderById,
@@ -122,4 +151,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getOrderByCode,
+  delteOrdeByCode
 };

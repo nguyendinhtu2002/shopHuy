@@ -69,7 +69,7 @@ export const deleteUser = async (id,access_token) => {
   const headers = {
     Authorization: `Bearer ${access_token}`,
   };
-  const res = await axios.delete(`${API}/api/v1/user/${id}`, {
+  const res = await axiosJWT.delete(`${API}/api/v1/user/${id}`, {
     headers,
   });
   return res.data;

@@ -8,11 +8,11 @@ import CartMessage from "../CartMessage/CartMessage";
 
 function Table(props) {
   const { data, columns, sub, loading, showMessage } = props;
+  console.log("🚀 ~ file: Table.js:11 ~ Table ~ showMessage:", showMessage)
   const [search, setSearch] = useState("");
   const [datas, setTempData] = useState(data);
   const [selectedOption, setSelectedOption] = useState("");
   const location = useLocation();
-  console.log("🚀 ~ file: Table.js:16 ~ Table ~ data:", data)
   let uniqueCategories;
   if(data.products){
     uniqueCategories = data.products.map((item) => item.category);

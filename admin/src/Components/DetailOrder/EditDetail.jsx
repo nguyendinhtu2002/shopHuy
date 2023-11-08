@@ -5,28 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/LoadingError";
-import * as UserService from "../../Services/UserService";
+import * as PayService from "../../Services/OrderSevice";
+import { fetchAsyncProductSingle } from "../../features/productSlide/productSlice";
 import { useMutationHooks } from "../../hooks/useMutationHooks";
+import { updateProductSingle } from "../../features/productSlide/ProductSliceNew";
 import CartMessage from "../CartMessage/CartMessage";
-
-const ToastObjects = {
-  pauseOnFocusLoss: false,
-  draggable: false,
-  pauseOnHover: false,
-  autoClose: 2000,
-};
 
 const EditOrderMain = (props) => {
   const { id } = props;
   const history = useNavigate();
 
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [updateAdmin, setUpdateAdmin] = useState("false");
-  const dispatch = useDispatch();
-  const toastId = React.useRef(null);
+  const [address, setAddress] = useState("");
+  const [quantity, setQuatity] = useState(0);
 
+  const [status, setStatus] = useState(false);
   const [showMessage,setShowMessage] = useState(false);
 
+  const toastId = React.useRef(null);
   const Toastobjects = {
     position: "top-right",
     autoClose: 5000,
@@ -36,35 +31,43 @@ const EditOrderMain = (props) => {
     draggable: true,
     progress: undefined,
   };
-  const handleGetDetailsUser = async (id) => {
-    const access_token = JSON.parse(localStorage.getItem("access_token"));
+  const dispatch = useDispatch();
 
-    const res = await UserService.getDetailsUser(id,access_token);
-    setIsAdmin(res.data.isAdmin);
+  const handleGetDetailsProduct = async (id, access_token) => {
+    const res = await PayService.getDetilsPay(id, access_token);
+    setAddress(res.address_line1);
+    setQuatity(res.products[0].quantity);
+    setStatus(res.isSucces);
     // dispatch(updateProductSingle({ res }));
   };
+  // const { productSingle } = useSelector((state) => state.ProductSignle);
   const mutation = useMutationHooks((data) => {
     const { id, access_token, ...rests } = data;
-    UserService.updateUser(id, rests, access_token);
+    PayService.updatePay(id, rests, access_token);
   });
-  const handleUpdate = (e) => {
-    const access_token = JSON.parse(localStorage.getItem("access_token"));
-    mutation.mutate({
-      id: id,
-      isAdmin: updateAdmin,
-      access_token,
-    });
-  };
   const { data, error, isLoading, isError, isSuccess } = mutation;
+  const handleUpdate = () => {
+    const access_token = localStorage.getItem("access_token");
+    const convert_acces_token = JSON.parse(access_token);
+    mutation.mutate({
+      id,
+      status,
+      access_token: convert_acces_token,
+    });
+
+    // mutation.mutate(decoded?.id, { phone, name, email, sex })
+  };
 
   useEffect(() => {
-    handleGetDetailsUser(id);
+    const access_token = localStorage.getItem("access_token");
+
+    handleGetDetailsProduct(id, JSON.parse(access_token));
     if (!error && isSuccess) {
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Thành công!", Toastobjects);
         setShowMessage(true);
         setTimeout(() => {
-          history('/users'); 
+          history('/orders'); 
         }, 1000); 
       }
     } else if (error) {
@@ -76,16 +79,18 @@ const EditOrderMain = (props) => {
       }
     }
   }, [id, error, isSuccess]);
-
   return (
     <>
+      {/* <Toast /> */}
       <section className="content-main" style={{ maxWidth: "1200px" }}>
         <form onSubmit={handleUpdate}>
           <div className="content-header">
-            <h2 className="content-title text-capitalize">Sửa thông tin người dùng</h2>
+            <h2 className="content-title text-capitalize">
+              Sửa thông tin Đơn hàng
+            </h2>
           </div>
 
-          <div className="row mb-4">
+          <div className="row">
             <div className="col-xl-12 col-lg-12">
               <div className="card mb-4 shadow-sm">
                 <div className="card-body">
@@ -100,33 +105,26 @@ const EditOrderMain = (props) => {
                     <Loading />
                   ) : (
                     <>
+                
                       <div className="mb-4">
-                        <label htmlFor="product_title" className="form-label">
-                          Admin
-                        </label>
-                        {isAdmin ? (
-                          <select
-                            class="form-select"
-                            aria-label="Default select example"
-                            defaultValue={"true"}
-                            onChange={(e) => setUpdateAdmin(e.target.value)}
+                        <label className="form-label">Trạng thái</label>
+                        <select
+                          className="form-control"
+                          onChange={(e) => setStatus(e.target.value)}
+                        >
+                          <option
+                            value={false}
+                            selected={status === false}
                           >
-                            {/* <option selected>Open this select menu</option> */}
-                            <option value="true">True</option>
-                            <option value="false">False</option>
-                          </select>
-                        ) : (
-                          <select
-                            class="form-select"
-                            aria-label="Default select example"
-                            defaultValue={"false"}
-                            onChange={(e) => setUpdateAdmin(e.target.value)}
+                            Chưa hoàn thành
+                          </option>
+                          <option
+                            value={true}
+                            selected={status === true}
                           >
-                            {/* <option selected>Open this select menu</option> */}
-                            <option value="false">False</option>
-                            <option value="true">True</option>
-                          </select>
-                        )}
+                            Hoàn thành
+                          </option>
+                        </select>
                       </div>
                     </>
                   )}
@@ -135,18 +133,21 @@ const EditOrderMain = (props) => {
             </div>
           </div>
         </form>
-
         <div className="d-flex gap-1 justify-content-end">
-          <Link to="/users" className="btn btn-outline-secondary border border-2 text-dark">
+          <Link
+            to="/orders"
+            className="btn btn-outline-secondary border border-2 text-dark"
+          >
             Quay về
           </Link>
           <div>
-            <button type="button" className="btn btn-success" onClick={()=>handleUpdate()}>
+            <button type="button" className="btn btn-success" onClick={()=> handleUpdate()}>
               Hoàn thành
             </button>
           </div>
         </div>
         {showMessage && <CartMessage text = "Sửa thành thành công" />}
+
       </section>
     </>
   );

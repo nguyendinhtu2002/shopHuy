@@ -117,6 +117,10 @@ const Orders = (props) => {
       selector: (row) => (row.status ? "Hoàn thành" : "Chưa hoàn thành"),
     },
     {
+      name: "Ghi chú",
+      selector: (row) => row.note,
+    },
+    {
       name: "Hành động",
       selector: (row) => (
         <div className="d-flex" style={{ width: "450px" }}>

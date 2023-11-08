@@ -10,19 +10,21 @@ import Toast from "../LoadingError/Toast";
 import CustomModal from "../Modal/Modal";
 
 const DetailOrder = (props) => {
-  const { data } = props;
+  const { data, code } = props;
   const [loading, setLoading] = useState("");
   const [tempData, setTempData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
+  const [id, setId] = useState("");
 
   const handleClose = () => {
     setShowModal(false);
     setIsDeleteConfirmed(false);
   };
-  const confirmDelete = () => {
+  const confirmDelete = (id) => {
     setIsDeleteConfirmed(true);
     setShowModal(true);
+    setId(id)
   };
   const [error, setError] = useState("");
   const toastId = React.useRef(null);
@@ -48,7 +50,7 @@ const DetailOrder = (props) => {
   };
   const handleDelete = async (id) => {
     if (id) {
-      await OrderService.deleteOrder(id)
+      await OrderService.deleteOrderByCode(code,id)
         .then((res) => {
           if (!toast.isActive(toastId.current)) {
             toastId.current = toast.success("Thành công!", Toastobjects);
@@ -80,35 +82,42 @@ const DetailOrder = (props) => {
       name: "Số lượng",
       selector: (row) => row.price,
     },
-    {
-      name: "Action",
-      selector: (row) => (
-        <div className="d-flex" style={{ width: "450px" }}>
-          <Link
-            to={`/orders/${row._id}/edit`}
-            style={{ marginRight: "5px" }}
-            // className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
-          >
-            <button className="btn btn-warning">Sửa</button>
-          </Link>
-          <button
-            type="button"
-            onClick={() => confirmDelete(row._id)}
-            className="btn btn-danger"
-          >
-            Xóa
-          </button>
-        </div>
-      ),
-    },
+   
   ];
+  if(data && data.length>0 ){
+    if(data[0].status == false){
+      columns.push( {
+        name: "Action",
+        selector: (row) => {
+          console.log("🚀 ~ file: DetailOrder.jsx:90 ~ DetailOrder ~ row:", row)
+          return (
+            <div style={{ width: "450px" }}>
+                <>
+                  {/* <Link to={`/orders/${row._id}/edit`} style={{ marginRight: "5px" }}>
+                    <button className="btn btn-warning">Sửa</button>
+                  </Link> */}
+                  <button
+                    type="button"
+                    onClick={() => confirmDelete(row.idProduct._id)}
+                    className="btn btn-danger"
+                  >
+                    Xóa
+                  </button>
+                </>
+        
+            </div>
+          );
+        },
+      })
+    }
+  }
   return (
     <>
-      <Toast />
+      {/* <Toast /> */}
       <CustomModal
         show={showModal}
-        handleClose={handleClose}
-        handleDelete={handleDelete}
+        handleClose={() => handleClose()}
+        handleDelete={() => handleDelete(id)}
       />
       <Table data={data} columns={columns} sub={false} />
     </>
