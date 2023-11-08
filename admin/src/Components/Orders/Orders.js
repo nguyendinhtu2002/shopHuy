@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Toast from "../LoadingError/Toast";
 import CustomModal from "../Modal/Modal";
 import CartMessage from "../CartMessage/CartMessage";
+import {formatPrice} from "../../utils/helpers";
 
 const Orders = (props) => {
   const { data } = props;
@@ -106,7 +107,7 @@ const Orders = (props) => {
     },
     {
       name: "Tổng tiền",
-      selector: (row) => row.totalPrice,
+      selector: (row) => formatPrice(row.totalPrice),
     },
     {
       name: "Thời gian đặt hàng",

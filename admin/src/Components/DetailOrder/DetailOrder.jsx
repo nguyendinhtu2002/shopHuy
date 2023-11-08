@@ -8,6 +8,7 @@ import * as OrderService from "../../Services/OrderSevice";
 import { toast } from "react-toastify";
 import Toast from "../LoadingError/Toast";
 import CustomModal from "../Modal/Modal";
+import {formatPrice} from "../../utils/helpers";
 
 const DetailOrder = (props) => {
   const { data } = props;
@@ -74,11 +75,11 @@ const DetailOrder = (props) => {
     },
     {
       name: "Giá sản phẩm",
-      selector: (row) => row.quantity,
+      selector: (row) => formatPrice(row.price)
     },
     {
       name: "Số lượng",
-      selector: (row) => row.price,
+      selector: (row) => row.quantity,
     },
     {
       name: "Action",
