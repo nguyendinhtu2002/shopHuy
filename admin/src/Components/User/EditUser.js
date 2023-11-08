@@ -7,6 +7,7 @@ import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/LoadingError";
 import * as UserService from "../../Services/UserService";
 import { useMutationHooks } from "../../hooks/useMutationHooks";
+import CartMessage from "../CartMessage/CartMessage";
 
 const ToastObjects = {
   pauseOnFocusLoss: false,
@@ -22,6 +23,9 @@ const EditOrderMain = (props) => {
   const [updateAdmin, setUpdateAdmin] = useState("false");
   const dispatch = useDispatch();
   const toastId = React.useRef(null);
+
+  const [showMessage,setShowMessage] = useState(false);
+
   const Toastobjects = {
     position: "top-right",
     autoClose: 5000,
@@ -56,6 +60,7 @@ const EditOrderMain = (props) => {
     if (!error && isSuccess) {
       if (!toast.isActive(toastId.current)) {
         toastId.current = toast.success("Thành công!", Toastobjects);
+        setShowMessage(true);
       }
     } else if (error) {
       if (!toast.isActive(toastId.current)) {
@@ -137,6 +142,7 @@ const EditOrderMain = (props) => {
             </button>
           </div>
         </div>
+        {showMessage && <CartMessage text = "Sửa thành thành công" />}
       </section>
     </>
   );

@@ -8,8 +8,6 @@ import { error } from "jquery";
 import DetailOrder from "../DetailOrder/DetailOrder";
 const ShowOrder = (props) => {
   const { code } = props;
-  console.log("🚀 ~ file: ShowOrder.js:10 ~ ShowOrder ~ props:", props)
-  console.log("🚀 ~ file: ShowOrder.js:10 ~ ShowOrder ~ code:", code)
   //   const orderList = useSelector((state) => state.orderList);
   //   const { loading, error, orders } = orderList;
   const [loading, setLoading] = useState("");

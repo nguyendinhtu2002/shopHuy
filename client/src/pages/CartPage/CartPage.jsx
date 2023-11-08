@@ -22,7 +22,7 @@ const CartPage = () => {
   //   await axios
   //     .post("http://localhost:5000/api/v1/pay", { carts, token, id })
   //     .then((res) => {
-  //       dispatch(clearCart());
+        // dispatch(clearCart());
   //     });
   // };
 
