@@ -6,9 +6,10 @@ const initialState = {
     access_token: '',
     isAdmin: false,
     phone: '',
-    usename: '',
     id: '',
-   
+    sex: 'Nam',
+    note: '',
+    address: '' 
 }
 
 export const userSlide = createSlice({
@@ -16,25 +17,27 @@ export const userSlide = createSlice({
     initialState,
     reducers: {
         updateUser: (state, action) => {
-            const {isAdmin, name = '', email = '', username = '', access_token , _id = '', phone = '' } = action.payload
+            const {isAdmin, name = '', email = '', access_token , _id = '', phoneNumber = '',sex = "", note, address } = action.payload
             state.name = name;
             state.email = email;
-            state.usename = username;
             state.id = _id;
-            state.phone = phone
+            state.phone = phoneNumber
             state.access_token = access_token;
             state.isAdmin= isAdmin;
-           
+            state.sex = sex;
+            state.note = note;
+            state.address = address  
         },
         resetUser: (state) => {
             state.name = "";
             state.email = "";
-            state.usename = "";
             state.access_token = "";
             state.id = "";
-            state.phone = ""
-            state.isAdmin= false
-           
+            state.phone = "";
+            state.isAdmin= false;
+            state.sex = 'Nam';
+            state.note =  "";
+            state.address =  ""
         },
 
     },

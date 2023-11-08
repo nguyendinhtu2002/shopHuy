@@ -1,14 +1,15 @@
 import React from "react";
 import "./CartMessage.scss";
-import { correct } from "../../utils/images";
+import { correct, cross } from "../../utils/images";
 
-const CartMessage = () => {
+const CartMessage = ({text, status = true}) => {
+
   return (
     <div className="cart-message text-center">
       <div className="cart-message-icon">
-        <img src={correct} alt="" />
+        {!status ? <img src={correct} alt="" /> : <img src={cross} alt="" />}
       </div>
-      <h6 className="text-white fs-14 fw-5">Sản phẩm đã được thêm vào giỏ hàng của bạn.</h6>
+      <h6 className="text-white fs-14 fw-5">{text}</h6>
     </div>
   );
 };

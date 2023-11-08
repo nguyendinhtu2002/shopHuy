@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./ProductSinglePage.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchAsyncProductSingle,
@@ -25,6 +25,7 @@ const ProductSinglePage = () => {
   const productSingleStatus = useSelector(getSingleProductStatus);
   const [quantity, setQuantity] = useState(1);
   const cartMessageStatus = useSelector(getCartMessageStatus);
+  const history = useNavigate();
 
   // getting single product
   useEffect(() => {
@@ -37,7 +38,7 @@ const ProductSinglePage = () => {
     }
   }, [cartMessageStatus, id]);
 
-  let discountedPrice = product?.price *0.9;
+  let discountedPrice = product?.price * 0.9;
   if (productSingleStatus === STATUS.LOADING) {
     return <Loader />;
   }
@@ -59,13 +60,32 @@ const ProductSinglePage = () => {
   };
 
   const addToCartHandler = (product) => {
-    let discountedPrice = product?.price *0.9;
+    let discountedPrice = product?.price * 0.9;
     let totalPrice = quantity * discountedPrice;
-    console.log('vào đây')
-    dispatch(addToCart({ ...product, quantity: quantity, totalPrice, price:discountedPrice }));
+    dispatch(
+      addToCart({
+        ...product,
+        quantity: quantity,
+        totalPrice,
+        price: discountedPrice,
+      })
+    );
     dispatch(setCartMessageOn(true));
   };
-
+  const addToCartHandlerNew = (product) => {
+    let discountedPrice = product?.price * 0.9;
+    let totalPrice = quantity * discountedPrice;
+    dispatch(
+      addToCart({
+        ...product,
+        quantity: quantity,
+        totalPrice,
+        price: discountedPrice,
+      })
+    );
+    // dispatch(setCartMessageOn(true));
+    history("/cart");
+  };
   return (
     <main className="py-5 bg-whitesmoke">
       <div className="product-single">
@@ -75,7 +95,9 @@ const ProductSinglePage = () => {
               <div className="product-img">
                 <div className="product-img-zoom">
                   <img
-                    src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
+                    src={
+                      product ? (product.imgUrl ? product.imgUrl[0] : "") : ""
+                    }
                     alt=""
                     className="img-cover"
                   />
@@ -84,28 +106,36 @@ const ProductSinglePage = () => {
                 <div className="product-img-thumbs flex align-center my-2">
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
+                      src={
+                        product ? (product.imgUrl ? product.imgUrl[0] : "") : ""
+                      }
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
+                      src={
+                        product ? (product.imgUrl ? product.imgUrl[0] : "") : ""
+                      }
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
+                      src={
+                        product ? (product.imgUrl ? product.imgUrl[0] : "") : ""
+                      }
                       alt=""
                       className="img-cover"
                     />
                   </div>
                   <div className="thumb-item">
                     <img
-                      src={product ? (product.imgUrl ? product.imgUrl[0] : "") : ""}
+                      src={
+                        product ? (product.imgUrl ? product.imgUrl[0] : "") : ""
+                      }
                       alt=""
                       className="img-cover"
                     />
@@ -132,12 +162,13 @@ const ProductSinglePage = () => {
                     <span className="text-orange fw-5">Hãng:</span>
                     <span className="mx-1">Apple</span>
                   </div>
-
                 </div>
 
                 <div className="price">
                   <div className="flex align-center">
-                    <div className="old-price text-gray">{formatPrice(product?.price)}</div>
+                    <div className="old-price text-gray">
+                      {formatPrice(product?.price)}
+                    </div>
                     <span className="fs-14 mx-2 text-dark">Bao gồm cả VAT</span>
                   </div>
 
@@ -162,7 +193,9 @@ const ProductSinglePage = () => {
                     >
                       <i className="fas fa-minus"></i>
                     </button>
-                    <div className="qty-value flex align-center justify-center">{quantity}</div>
+                    <div className="qty-value flex align-center justify-center">
+                      {quantity}
+                    </div>
                     <button
                       type="button"
                       className="qty-increase flex align-center justify-center"
@@ -181,7 +214,11 @@ const ProductSinglePage = () => {
                 </div>
 
                 <div className="btns">
-                  <button type="button" className="add-to-cart-btn btn" style={{width:"210px"}}>
+                  <button
+                    type="button"
+                    className="add-to-cart-btn btn"
+                    style={{ width: "210px" }}
+                  >
                     <i className="fas fa-shopping-cart"></i>
                     <span
                       className="btn-text mx-2"
@@ -192,7 +229,14 @@ const ProductSinglePage = () => {
                       Thêm vào giỏ hàng
                     </span>
                   </button>
-                  <button type="button" className="buy-now btn mx-3" style={{width:"210px"}}>
+                  <button
+                    type="button"
+                    className="buy-now btn mx-3"
+                    style={{ width: "210px" }}
+                    onClick={() => {
+                      addToCartHandlerNew(product);
+                    }}
+                  >
                     <span className="btn-text">Mua ngay</span>
                   </button>
                 </div>
@@ -202,7 +246,9 @@ const ProductSinglePage = () => {
         </div>
       </div>
 
-      {cartMessageStatus && <CartMessage />}
+      {cartMessageStatus && (
+        <CartMessage text="Sản phẩm đã được thêm vào giỏ hàng của bạn." />
+      )}
     </main>
   );
 };

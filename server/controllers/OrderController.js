@@ -120,7 +120,6 @@ const delteOrdeByCode = async (req, res, next) => {
   try {
     const code = req.params.code;
     const { productIdToRemove } = req.body;
-    console.log("🚀 ~ file: OrderController.js:122 ~ delteOrdeByCode ~ productIdToRemove:", productIdToRemove)
 
     const order = await Order.findOneAndUpdate(
       { orderCode: code },
@@ -143,6 +142,35 @@ const delteOrdeByCode = async (req, res, next) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 }
+const getOrderByUser = async(req,res,next) =>{
+  try {
+    const id = req.params.id;
+    const order = await Order.find({idUser: id});
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    return res.status(200).json(order);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
+const getDetailOrder = async(req,res,next) => {
+  try {
+    const id = req.params.id;
+    const order = await Order.findOne({_id: id}).populate({
+      path: "products.idProduct",
+      select: "name productCode imgUrl brand",
+    });
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+    const newData = {data:order.products, orderCode: order.orderCode};
+    return res.status(200).json(newData);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+}
 
 module.exports = {
   createOrder,
@@ -151,5 +179,7 @@ module.exports = {
   updateOrder,
   deleteOrder,
   getOrderByCode,
-  delteOrdeByCode
+  delteOrdeByCode,
+  getOrderByUser,
+  getDetailOrder
 };

@@ -80,8 +80,6 @@ const Login = () => {
 
       // dispatch(updateUser({ data }))
     } else if (error) {
-      console.log("🚀 ~ file: LoginScreen.js:83 ~ useEffect ~ error:", error)
-      console.log("🚀 ~ file: LoginScreen.js:95 ~ useEffect ~ (error.response.data.error:", (error.response.data.error))
       if(error.code === "ERR_NETWORK"){
         if (!toast.isActive(toastId.current)) {
           toastId.current = toast.error("Lỗi phía máy chủ", Toastobjects);

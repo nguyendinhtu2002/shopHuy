@@ -22,23 +22,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  address: [
-    {
-      address: {
-        type: String,
-      },
-      ward: {
-        type: String,
-      },
-      district: {
-        type: String,
-      },
-      city: {
-        type: String,
-      },
-      code: [String],
-    },
-  ],
+  address: {
+    type: String,
+  },
+  note:{
+    type: String,
+  },
   phoneNumber: {
     type: String,
     require: true,
@@ -76,11 +65,9 @@ userSchema.pre("save", async function (next) {
       { userCode: 1 },
       { sort: { userCode: -1 } }
     );
-    console.log("🚀 ~ file: User.js:79 ~ highestProduct:", highestProduct)
 
     if (highestProduct) {
       const lastuserCode = highestProduct.userCode;
-      console.log("🚀 ~ file: User.js:83 ~ lastuserCode:", lastuserCode)
       const lastNumber = parseInt(lastuserCode.substr(2), 10);
       this.userCode = `SP${lastNumber + 1}`;
     } else {

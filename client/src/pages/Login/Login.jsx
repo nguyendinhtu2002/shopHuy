@@ -18,6 +18,7 @@ import { updateUser } from "../../features/userSlide/userSlide";
 import Toast from "../../components/LoadingError/Toast";
 import { toast } from "react-toastify";
 import jwt_decode from "jwt-decode";
+import CartMessage from "../../components/CartMessage/CartMessage";
 
 const schema = yup.object({
   email: yup.string().required("email is a required field"),
@@ -30,7 +31,8 @@ function Login() {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useNavigate();
-
+  const [showMessage,setShowMessage] = useState(false);
+  
   const toastId = React.useRef(null);
   const Toastobjects = {
     position: "top-right",
@@ -83,6 +85,7 @@ function Login() {
         if (!toast.isActive(toastId.current)) {
           toastId.current = toast.success("Thành công", Toastobjects);
         }
+        setShowMessage(true);
       }
 
       // dispatch(updateUser({ data }))
@@ -101,7 +104,6 @@ function Login() {
   }, [isSuccess, history, email, error]);
   return (
     <>
-      <Toast />
       <div className="login-page">
         <div className="login-wrapper">
           <div className="login-title">
@@ -136,6 +138,8 @@ function Login() {
           </form>
         </div>
       </div>
+      {showMessage && <CartMessage text="Login thành công" />}
+
     </>
   );
 }
