@@ -37,7 +37,7 @@ const ProductSinglePage = () => {
     }
   }, [cartMessageStatus, id]);
 
-  let discountedPrice = product?.price - product?.price * (product?.price / 100);
+  let discountedPrice = product?.price *0.9;
   if (productSingleStatus === STATUS.LOADING) {
     return <Loader />;
   }
@@ -59,10 +59,10 @@ const ProductSinglePage = () => {
   };
 
   const addToCartHandler = (product) => {
-    let discountedPrice = product?.price - product?.price * (product?.discountPercentage / 100);
-    let totalPrice = quantity * product?.price;
-
-    dispatch(addToCart({ ...product, quantity: quantity, totalPrice, discountedPrice }));
+    let discountedPrice = product?.price *0.9;
+    let totalPrice = quantity * discountedPrice;
+    console.log('vào đây')
+    dispatch(addToCart({ ...product, quantity: quantity, totalPrice, price:discountedPrice }));
     dispatch(setCartMessageOn(true));
   };
 
@@ -121,28 +121,24 @@ const ProductSinglePage = () => {
                   <p className="para fw-3 fs-15">{product?.description}</p>
                 </div>
                 <div className="info flex align-center flex-wrap fs-14">
-                  <div className="rating">
-                    <span className="text-orange fw-5">Rating:</span>
-                    <span className="mx-1">{product?.rate}</span>
-                  </div>
-                  <div className="vert-line"></div>
                   <div className="brand">
-                    <span className="text-orange fw-5">Brand:</span>
-                    <span className="mx-1">IPHONE</span>
-                  </div>
-                  <div className="vert-line"></div>
-                  <div className="brand">
-                    <span className="text-orange fw-5">Category:</span>
+                    <span className="text-orange fw-5">Danh mục:</span>
                     <span className="mx-1 text-capitalize">
                       {product?.category ? product.name.replace("-", " ") : ""}
                     </span>
                   </div>
+                  <div className="vert-line"></div>
+                  <div className="brand">
+                    <span className="text-orange fw-5">Hãng:</span>
+                    <span className="mx-1">Apple</span>
+                  </div>
+
                 </div>
 
                 <div className="price">
                   <div className="flex align-center">
                     <div className="old-price text-gray">{formatPrice(product?.price)}</div>
-                    <span className="fs-14 mx-2 text-dark">Inclusive of all taxes</span>
+                    <span className="fs-14 mx-2 text-dark">Bao gồm cả VAT</span>
                   </div>
 
                   <div className="flex align-center my-1">
@@ -150,13 +146,14 @@ const ProductSinglePage = () => {
                       {formatPrice(discountedPrice)}
                     </div>
                     <div className="discount bg-orange fs-13 text-white fw-6 font-poppins">
-                      {formatPrice(product?.price)}% OFF
+                      {/*{formatPrice(product?.price)}% OFF*/}
+                      10% OFF
                     </div>
                   </div>
                 </div>
 
                 <div className="qty flex align-center my-4">
-                  <div className="qty-text">Quantity:</div>
+                  <div className="qty-text">Số lượng:</div>
                   <div className="qty-change flex align-center mx-3">
                     <button
                       type="button"
@@ -184,7 +181,7 @@ const ProductSinglePage = () => {
                 </div>
 
                 <div className="btns">
-                  <button type="button" className="add-to-cart-btn btn">
+                  <button type="button" className="add-to-cart-btn btn" style={{width:"210px"}}>
                     <i className="fas fa-shopping-cart"></i>
                     <span
                       className="btn-text mx-2"
@@ -192,11 +189,11 @@ const ProductSinglePage = () => {
                         addToCartHandler(product);
                       }}
                     >
-                      add to cart
+                      Thêm vào giỏ hàng
                     </span>
                   </button>
-                  <button type="button" className="buy-now btn mx-3">
-                    <span className="btn-text">buy now</span>
+                  <button type="button" className="buy-now btn mx-3" style={{width:"210px"}}>
+                    <span className="btn-text">Mua ngay</span>
                   </button>
                 </div>
               </div>
