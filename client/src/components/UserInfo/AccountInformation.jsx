@@ -87,9 +87,7 @@ function AccountInformation() {
               <div className="p-2">
                 <p>Giới tính</p>
               </div>
-              <div className="p-2">
-                <p>Ngày sinh</p>
-              </div>
+
             </div>
             <div className="space-y-10">
               <div className="border">
@@ -113,9 +111,6 @@ function AccountInformation() {
                   <option value="Nữ"  selected={sex == "Nữ"}>Nữ</option>
                 </select>
               </div>
-              <div className="border">
-                <input className="w-full p-4 text-xl" type="date" />
-              </div>
             </div>
           </div>
 
@@ -127,11 +122,8 @@ function AccountInformation() {
                 </p>
               </div>
               <div className="p-2">
-                <p>
-                  Email <span className="text-[#FF0505]">*</span>
-                </p>
+                <p>Ngày sinh</p>
               </div>
-              
             </div>
             <div className="space-y-10">
               <div className="border">
@@ -145,16 +137,8 @@ function AccountInformation() {
                 />
               </div>
               <div className="border">
-                <input
-                  className="w-full p-4 text-xl"
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
+                <input className="w-full p-4 text-xl" type="date" />
               </div>
-          
             </div>
           </div>
         </div>
