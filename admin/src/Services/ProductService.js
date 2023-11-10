@@ -31,7 +31,7 @@ export const updateProduct = async (id, data, access_token) => {
 };
 
 export const deleteProduct = async (id, access_token) => {
-  const res = await axiosJWT.delete(`${API}/api/v1/product/delete/${id}`, {
+  const res = await axiosJWT.post(`${API}/api/v1/product/delete/${id}`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
