@@ -95,7 +95,7 @@ function AddressDelivery() {
                 <span className="text-[#ABABAB]">{userLogin.phone}</span>
               </div>
               <div className="">
-                <p className="text-[#ABABAB]">Địa chỉ</p>
+                <p className="text-bold font-semibold">Địa chỉ: </p>
                 <p className="text-[#ABABAB]">{address}</p>
               </div>
               <div className="absolute flex text-[14px] gap-5 right-3 top-1/2 -translate-y-1/2">

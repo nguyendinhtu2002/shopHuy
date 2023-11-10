@@ -23,6 +23,7 @@ function HistoryOrder(props) {
       try {
         setLoading(true); // Bắt đầu loading
         const historyData = await HistoryOrderService.getHistoryOrder(user.id);
+        console.log("🚀 ~ file: HistoryOrder.jsx:26 ~ fetchData ~ historyData:", historyData)
         setData(historyData);
       } catch (error) {
         // Xử lý lỗi nếu cần
@@ -57,9 +58,9 @@ function HistoryOrder(props) {
                 <p className="text-[#ABABAB]">{new Date(item.createAt).toLocaleString()}</p>
                 </div>
                 <div className="text-2xl">
-                  <p className="text-[#ABABAB]">Địa chỉ:</p>
+                  <p className="text-bold font-semibold">Địa chỉ: </p>
                   <p className="text-[#ABABAB]">
-                    {item.address}
+                    {item.local}
                   </p>
                 </div>
               </button>
