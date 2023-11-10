@@ -34,7 +34,7 @@ function HistoryProduct(props) {
             {loading && data.data?.map((item) => (
               <a className="block" href="/product/undefined">
                 <div className="product-history bg-white mb-3">
-                  <div className="category">smartphones</div>
+                  <div className="category">Điện thoại</div>
                   <div className="product-item-img">
                     <img
                       className="img-cover"

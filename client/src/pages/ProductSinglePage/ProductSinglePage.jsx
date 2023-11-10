@@ -160,7 +160,7 @@ const ProductSinglePage = () => {
                   <div className="vert-line"></div>
                   <div className="brand">
                     <span className="text-orange fw-5">Hãng:</span>
-                    <span className="mx-1">Apple</span>
+                    <span className="mx-1">{product?.brand}</span>
                   </div>
                 </div>
 

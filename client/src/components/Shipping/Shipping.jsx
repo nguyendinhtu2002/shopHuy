@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PaymentByCard from "../MethodPayment/PaymentByCard";
 import InternetBanking from "../MethodPayment/InternetBanking";
 import ShipCOD from "../MethodPayment/ShipCOD";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { formatPrice } from "../../utils/helpers";
 import { useMutationHooks } from "../../hooks/useMutationHook";
@@ -25,6 +25,7 @@ function Shipping() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState(false);
   const [errorMessage, setError] = useState(false);
+  const history = useNavigate();
   const handleInternetBanking = () => {
     setInternetBanking(true);
     setShipCod(false);
@@ -105,6 +106,9 @@ function Shipping() {
       dispatch(clearCart());
       setShowMessage(true);
       setMessage("Đặt hàng thành công");
+      setTimeout(() => {
+        history("/");
+      }, 1000);
     } else if (error) {
       setShowMessage(true);
       setMessage("Đặt hàng thất bại");

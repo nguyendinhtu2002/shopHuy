@@ -23,7 +23,7 @@ const Product = ({ product }) => {
           <div className="title py-2">{product?.name}</div>
           <div className="price flex align-center justify-center">
             <span className="old-price">{formatPrice(product?.price)}</span>
-            <span className="new-price">{formatPrice(product?.price)}</span>
+            <span className="new-price">{formatPrice(product?.price - (product?.price*0.1))}</span>
             <span className="discount fw-6">
               {product?.discountedPercentage}
             </span>
