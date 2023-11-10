@@ -35,7 +35,7 @@ function HistoryProduct(props) {
               <a className="block" href="/product/undefined">
                 <div className="product-history bg-white mb-3">
                   <div className="category">smartphones</div>
-                  <div className="product-history-img">
+                  <div className="product-item-img">
                     <img
                       className="img-cover"
                       src={item.idProduct.imgUrl[0]}

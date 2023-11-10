@@ -247,7 +247,7 @@ const ProductSinglePage = () => {
       </div>
 
       {cartMessageStatus && (
-        <CartMessage text="Sản phẩm đã được thêm vào giỏ hàng của bạn." />
+        <CartMessage text="Sản phẩm đã được thêm vào giỏ hàng của bạn." status={false} />
       )}
     </main>
   );

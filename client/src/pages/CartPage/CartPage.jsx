@@ -22,9 +22,16 @@ const CartPage = () => {
   //   await axios
   //     .post("http://localhost:5000/api/v1/pay", { carts, token, id })
   //     .then((res) => {
-        // dispatch(clearCart());
+  // dispatch(clearCart());
   //     });
   // };
+
+  const handleToggle = (id) => {
+    console.log("🚀 ~ file: CartPage.jsx:30 ~ handleToggle ~ id:", id)
+    return {
+  }
+    // dispatch(toggleCartQty({ id: cart?.id, type: "DEC" }))
+  }
 
   const handleCheckout = () => {};
 
@@ -97,7 +104,7 @@ const CartPage = () => {
                         type="button"
                         className="qty-decrease flex align-center justify-center"
                         onClick={() =>
-                          dispatch(toggleCartQty({ id: cart?.id, type: "DEC" }))
+                          dispatch(toggleCartQty({ id: cart?._id, type: "DEC" }))
                         }
                       >
                         <i className="fas fa-minus"></i>
@@ -111,7 +118,7 @@ const CartPage = () => {
                         type="button"
                         className="qty-increase flex align-center justify-center"
                         onClick={() =>
-                          dispatch(toggleCartQty({ id: cart?.id, type: "INC" }))
+                          dispatch(toggleCartQty({ id: cart?._id, type: "INC" }))
                         }
                       >
                         <i className="fas fa-plus"></i>
@@ -128,7 +135,7 @@ const CartPage = () => {
                   <div className="cart-ctd ">
                     <button
                       className="delete-btn text-[#0500FF]"
-                      onClick={() => dispatch(removeFromCart(cart?.id))}
+                      onClick={() => dispatch(removeFromCart({ id: cart?._id }))}
                     >
                       Xóa
                     </button>
@@ -152,9 +159,7 @@ const CartPage = () => {
 
             <div className="cart-cfoot-r flex flex-column justify-end">
               <div className="total-txt flex align-center justify-end">
-                <div className="font-manrope fw-5">
-                  Tổng tiền:{" "}
-                </div>
+                <div className="font-manrope fw-5">Tổng tiền: </div>
                 <span className="text-orange fs-22 mx-2 fw-6">
                   {formatPrice(totalAmount)}
                 </span>
@@ -214,7 +219,8 @@ const CartPage = () => {
                         type="button"
                         className="qty-decrease flex align-center justify-center"
                         onClick={() =>
-                          dispatch(toggleCartQty({ id: cart?.id, type: "DEC" }))
+                          dispatch(toggleCartQty({ id: cart?._id, type: "DEC" }))
+
                         }
                       >
                         <i className="fas fa-minus"></i>
@@ -228,7 +234,7 @@ const CartPage = () => {
                         type="button"
                         className="qty-increase flex align-center justify-center"
                         onClick={() =>
-                          dispatch(toggleCartQty({ id: cart?.id, type: "INC" }))
+                          dispatch(toggleCartQty({ id: cart?._id, type: "INC" }))
                         }
                       >
                         <i className="fas fa-plus"></i>
@@ -238,7 +244,7 @@ const CartPage = () => {
                   <div className="cart-ctd ">
                     <button
                       className="delete-btn text-dark"
-                      onClick={() => dispatch(removeFromCart(cart?.id))}
+                      onClick={() => dispatch(removeFromCart({ id: cart?._id }))}
                     >
                       Xóa
                     </button>
