@@ -74,7 +74,7 @@ const MainProducts = () => {
     },
     {
       name: "Danh mục",
-      selector: (row) => "test",
+      selector: (row) => row.category.name,
     },
     {
       name: "Giá bán",

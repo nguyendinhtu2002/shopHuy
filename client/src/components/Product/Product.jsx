@@ -18,9 +18,9 @@ const Product = ({ product }) => {
         <div className="product-item-info fs-14">
           <div className="brand">
             <span>Brand: </span>
-            <span className="fw-7">IPHONE</span>
+            <span className="fw-7">{product?.brand}</span>
           </div>
-          <div className="title py-2">{product?.description}</div>
+          <div className="title py-2">{product?.name}</div>
           <div className="price flex align-center justify-center">
             <span className="old-price">{formatPrice(product?.price)}</span>
             <span className="new-price">{formatPrice(product?.price)}</span>

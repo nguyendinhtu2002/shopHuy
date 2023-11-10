@@ -238,12 +238,14 @@ const AddProductMain = () => {
                       <option value="" selected disabled>
                         None
                       </option>
-                      <option value="samsung">SamSung</option>
+                      <option value="Samsung">Samsung</option>
                       <option value="taotau">Táo tàu</option>
                       <option value="taocannua">Táo cắn nửa</option>
                       <option value="iphone">Iphone</option>
                       <option value="redmi">Redmi</option>
                       <option value="oppo">Oppo</option>
+                      <option value="Apple">Apple</option>
+
                     </select>
                   </div>
   
