@@ -1,5 +1,6 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
+const Payment = require("../models/Payment");
 
 const Joi = require("joi");
 
@@ -22,14 +23,24 @@ const createOrder = async (req, res, next) => {
     let totalQuantity = 0;
     if (products && products.length > 0) {
       products.forEach((element) => {
-        totalPrice += element.price;
+        totalPrice += element.price * element.quantity;
         totalQuantity += element.quantity;
       });
     }
     const newOrder = new Order({ ...req.body, totalPrice, totalQuantity });
     const savedOrder = await newOrder.save();
+    if(savedOrder){
+      const newPayment = new Payment({
+        userId: req.body.idUser,
+        type: 'cash',
+        orderId: savedOrder._id,
+        money: totalPrice
+      });
+      await newPayment.save();
+    }
     return res.status(201).json(savedOrder);
   } catch (error) {
+    console.log("🚀 ~ file: OrderController.js:43 ~ createOrder ~ error:", error)
     return res.status(500).json({ error: "Internal server error" });
   }
 };
